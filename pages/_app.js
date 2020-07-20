@@ -1,5 +1,6 @@
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Head from 'next/head'
 
 const theme = createMuiTheme({
   palette: {
@@ -31,6 +32,10 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={theme}>
+          <Head>
+        <title>Affordable Housing Search</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <CssBaseline/>
       <Component {...pageProps} />
     </ThemeProvider>
