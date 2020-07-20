@@ -1,0 +1,29 @@
+{
+  "name": "community-billboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/styles": "^4.10.0",
+    "algoliasearch": "^4.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "mongodb": "^3.5.9",
+    "next": "9.4.4",
+    "next-connect": "^0.8.1",
+    "next-images": "^1.4.0",
+    "qrcode": "^1.4.4",
+    "qs": "^6.9.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-instantsearch-dom": "^6.6.0"
+  }
+}
