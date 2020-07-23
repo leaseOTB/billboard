@@ -1,6 +1,8 @@
 
 ## LeaseOTB Affordable Housing Billboard
 
+## READ THE CONTRIBUTION GUIDELINES + RESOURCES IN THE BILLBOARD WIKI BEFORE CONTRIBUTING
+
 First, run the development server:
 
 ```bash
