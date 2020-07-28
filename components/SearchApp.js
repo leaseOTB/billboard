@@ -1,19 +1,9 @@
 import React from 'react';
-
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import SearchCard from './SearchCard';
-import {
-  RefinementList,
-  connectSearchBox,
-  Configure,
-  connectHits,
-  connectInfiniteHits,
-  connectPagination,
-  Highlight,
-  InstantSearch,
-} from 'react-instantsearch-dom';
-
+import SearchList from './SearchList';
+import { InstantSearch } from 'react-instantsearch-dom';
 import {
   Grid,
   Card,
@@ -29,67 +19,18 @@ import {
   TextField,
   Paper,
   Chip,
+  Switch,
+  FormGroup,
+  withStyles,
 } from '@material-ui/core';
-
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
+import CustomSearchBox from './SearchBar';
+import CustomCardHits from './CardHits';
+import CustomListHits from './ListHits';
 
 let searching = false;
-
-const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
-  if (currentRefinement !== null) {
-    searching = true;
-  }
-  if (currentRefinement == '') {
-    searching = false;
-  }
-  return (
-    <Grid container direction='row'>
-      <form
-        noValidate
-        action=''
-        role='search'
-        style={{ width: '70%', marginTop: '2em' }}
-      >
-        <TextField
-          fullWidth
-          autoFocus
-          type='search'
-          size='medium'
-          placeholder={'Search by Address, ZIP Code, etc...'}
-          value={currentRefinement}
-          onChange={(event) => refine(event.currentTarget.value)}
-        />
-      </form>
-    </Grid>
-  );
-};
-
-const CustomSearchBox = connectSearchBox(SearchBox);
-
-const Hits = ({ hits }) => {
-  if (hits.length === 0 || !hits)
-    return (
-      <Alert severity='error'>
-        <AlertTitle>No results... Try something else!</AlertTitle>
-      </Alert>
-    );
-  return (
-    <Grid container direction='row' spacing={2}>
-      {hits.map((hit) => (
-        <SearchCard
-          address={hit.STREET_ADDRESS}
-          zipCode={hit.ZIP}
-          key={hit.objectID}
-          id={hit._id}
-        />
-      ))}
-    </Grid>
-  );
-};
-
-const CustomHits = connectInfiniteHits(Hits);
 
 const SearchApp = ({
   searchState,
@@ -99,6 +40,51 @@ const SearchApp = ({
   indexName,
   searchClient,
 }) => {
+  const [state, setState] = React.useState({
+    checked: true,
+  });
+  const handleChange = (event) => {
+    if (state.checked === true) {
+      setState({ checked: false });
+    } else {
+      setState({ checked: true });
+    }
+  };
+
+  const AntSwitch = withStyles((theme) => ({
+    root: {
+      width: 28,
+      height: 16,
+      padding: 0,
+      display: 'flex',
+    },
+    switchBase: {
+      padding: 2,
+      color: theme.palette.grey[500],
+      '&$checked': {
+        transform: 'translateX(12px)',
+        color: theme.palette.common.white,
+        '& + $track': {
+          opacity: 1,
+          backgroundColor: theme.palette.primary.main,
+          borderColor: theme.palette.primary.main,
+        },
+      },
+    },
+    thumb: {
+      width: 12,
+      height: 12,
+      boxShadow: 'none',
+    },
+    track: {
+      border: `1px solid ${theme.palette.grey[500]}`,
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor: theme.palette.common.white,
+    },
+    checked: {},
+  }))(Switch);
+
   return (
     <div style={{ minHeight: '90vh' }}>
       <InstantSearch
@@ -115,6 +101,22 @@ const SearchApp = ({
         </Typography>
         <CustomSearchBox />
         <br />
+        <FormGroup>
+          <Typography component='div'>
+            <Grid component='label' container alignItems='center' spacing={1}>
+              <Grid item>Card</Grid>
+              <Grid item>
+                <AntSwitch
+                  checked={state.checked}
+                  onChange={handleChange}
+                  name='checked'
+                />
+              </Grid>
+              <Grid item>List</Grid>
+            </Grid>
+          </Typography>
+        </FormGroup>
+        <br />
         {!searching ? (
           <>
             <br />
@@ -122,13 +124,11 @@ const SearchApp = ({
               <AlertTitle>Start Typing to Find Your Building!</AlertTitle>
             </Alert>
             <br />
-
-            <CustomHits />
+            {!state.checked ? <CustomCardHits /> : <CustomListHits />}
           </>
         ) : (
           <>
-            <CustomHits />
-
+            {!state.checked ? <CustomCardHits /> : <CustomListHits />}
             <br />
           </>
         )}
