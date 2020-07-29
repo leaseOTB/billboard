@@ -75,7 +75,7 @@ const ListHits = ({ hits }) => {
             <TableRow>
               <StyledTableCell>Picture</StyledTableCell>
               <StyledTableCell align='right'>Address</StyledTableCell>
-              <StyledTableCell align='riht'>Zip Code</StyledTableCell>
+              <StyledTableCell align='right'>Zip Code</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

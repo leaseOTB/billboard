@@ -35,7 +35,6 @@ const CardHits = ({ hits }) => {
         <AlertTitle>No results... Try something else!</AlertTitle>
       </Alert>
     );
-
   return (
     <Grid container direction='row' spacing={2}>
       {hits.map((hit) => (

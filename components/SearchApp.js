@@ -21,7 +21,6 @@ import {
   Chip,
   Switch,
   FormGroup,
-  withStyles,
 } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -30,7 +29,7 @@ import CustomSearchBox from './SearchBar';
 import CustomCardHits from './CardHits';
 import CustomListHits from './ListHits';
 
-let searching = false;
+// let searching = false;
 
 const SearchApp = ({
   searchState,
@@ -41,50 +40,13 @@ const SearchApp = ({
   searchClient,
 }) => {
   const [state, setState] = React.useState({
-    checked: true,
+    checked: false,
   });
+
   const handleChange = (event) => {
-    if (state.checked === true) {
-      setState({ checked: false });
-    } else {
-      setState({ checked: true });
-    }
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
-
-  const AntSwitch = withStyles((theme) => ({
-    root: {
-      width: 28,
-      height: 16,
-      padding: 0,
-      display: 'flex',
-    },
-    switchBase: {
-      padding: 2,
-      color: theme.palette.grey[500],
-      '&$checked': {
-        transform: 'translateX(12px)',
-        color: theme.palette.common.white,
-        '& + $track': {
-          opacity: 1,
-          backgroundColor: theme.palette.primary.main,
-          borderColor: theme.palette.primary.main,
-        },
-      },
-    },
-    thumb: {
-      width: 12,
-      height: 12,
-      boxShadow: 'none',
-    },
-    track: {
-      border: `1px solid ${theme.palette.grey[500]}`,
-      borderRadius: 16 / 2,
-      opacity: 1,
-      backgroundColor: theme.palette.common.white,
-    },
-    checked: {},
-  }))(Switch);
-
+  console.log(searchState);
   return (
     <div style={{ minHeight: '90vh' }}>
       <InstantSearch
@@ -100,34 +62,62 @@ const SearchApp = ({
           Affordable Housing Community Billboard
         </Typography>
         <CustomSearchBox />
-        <br />
-        <FormGroup>
-          <Typography component='div'>
-            <Grid component='label' container alignItems='center' spacing={1}>
-              <Grid item>Card</Grid>
-              <Grid item>
-                <AntSwitch
-                  checked={state.checked}
-                  onChange={handleChange}
-                  name='checked'
-                />
-              </Grid>
-              <Grid item>List</Grid>
-            </Grid>
-          </Typography>
-        </FormGroup>
-        <br />
-        {!searching ? (
+
+        {searchState !== null && searchState.query.length < 1 ? (
           <>
             <br />
             <Alert severity='info'>
               <AlertTitle>Start Typing to Find Your Building!</AlertTitle>
             </Alert>
             <br />
+            <FormGroup>
+              <Typography component='div'>
+                <Grid
+                  component='label'
+                  container
+                  alignItems='center'
+                  spacing={1}
+                >
+                  <Grid item>Card</Grid>
+                  <Grid item>
+                    <Switch
+                      checked={state.checked}
+                      onChange={handleChange}
+                      name='checked'
+                      color='primary'
+                    />
+                  </Grid>
+                  <Grid item>List</Grid>
+                </Grid>
+              </Typography>
+            </FormGroup>
+            <br />
             {!state.checked ? <CustomCardHits /> : <CustomListHits />}
           </>
         ) : (
           <>
+            <FormGroup>
+              <Typography component='div'>
+                <Grid
+                  component='label'
+                  container
+                  alignItems='center'
+                  spacing={1}
+                >
+                  <Grid item>Card</Grid>
+                  <Grid item>
+                    <Switch
+                      checked={state.checked}
+                      onChange={handleChange}
+                      name='checked'
+                      color='primary'
+                    />
+                  </Grid>
+                  <Grid item>List</Grid>
+                </Grid>
+              </Typography>
+            </FormGroup>
+            <br />
             {!state.checked ? <CustomCardHits /> : <CustomListHits />}
             <br />
           </>
