@@ -3,10 +3,10 @@ import React from 'react'
 import Link from 'next/link'
 
 import {
-  Grid,
-  Card,
-  Typography,
-  AppBar,
+  Grid, 
+  Card, 
+  Typography, 
+  AppBar, 
   Toolbar,
   Hidden,
   List,
@@ -17,7 +17,6 @@ import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search'
-import GetAppIcon from '@material-ui/icons/GetApp';
 
 const Layout = ({children}) => {
   return (
@@ -45,12 +44,6 @@ const Layout = ({children}) => {
                       <Typography variant='body1' color='textPrimary'></Typography>
                     </Grid>
                   </Link>
-                  <hr/>
-                  <a href='https://storage.googleapis.com/buildings-api/LOTB%20-IWWH-Buildings.csv' style={{textDecoration: 'none', color:'inherit'}}>
-                    <Grid container direction='row'>
-                      <GetAppIcon color='inherit' />
-                    </Grid>
-                  </a>
                 </div>
 
               </Grid>
@@ -76,7 +69,7 @@ const Layout = ({children}) => {
             </a>
           </Grid>
 
-        </Toolbar>
+        </Toolbar> 
       </AppBar>
     </>
   )
