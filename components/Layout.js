@@ -52,7 +52,6 @@ const Layout = ({children}) => {
                     </Grid>
                   </a>
                 </div>
-
               </Grid>
 
             </div>
