@@ -3,10 +3,10 @@ import React from 'react'
 import Link from 'next/link'
 
 import {
-  Grid, 
-  Card, 
-  Typography, 
-  AppBar, 
+  Grid,
+  Card,
+  Typography,
+  AppBar,
   Toolbar,
   Hidden,
   List,
@@ -16,7 +16,8 @@ import {
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import SearchIcon from '@material-ui/icons/Search'
+import SearchIcon from '@material-ui/icons/Search';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 const Layout = ({children}) => {
   return (
@@ -44,10 +45,14 @@ const Layout = ({children}) => {
                       <Typography variant='body1' color='textPrimary'></Typography>
                     </Grid>
                   </Link>
+                  <hr/>
+                  <a href='https://storage.googleapis.com/buildings-api/LOTB%20-IWWH-Buildings.csv' style={{textDecoration: 'none', color: 'inherit'}}>
+                    <Grid container direction='row'>
+                      <GetAppIcon color='inherit' />
+                    </Grid>
+                  </a>
                 </div>
-
               </Grid>
-
             </div>
           </Grid>
         </Hidden>
@@ -68,8 +73,7 @@ const Layout = ({children}) => {
               <img height='20em' src='https://res.cloudinary.com/hilnmyskv/image/upload/q_auto/v1594300044/Algolia_com_Website_assets/images/shared/algolia_logo/search-by-algolia-light-background.svg'></img>
             </a>
           </Grid>
-
-        </Toolbar> 
+        </Toolbar>
       </AppBar>
     </>
   )
