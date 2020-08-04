@@ -3,10 +3,10 @@ import React from 'react'
 import Link from 'next/link'
 
 import {
-  Grid, 
-  Card, 
-  Typography, 
-  AppBar, 
+  Grid,
+  Card,
+  Typography,
+  AppBar,
   Toolbar,
   Hidden,
   List,
@@ -45,9 +45,7 @@ const Layout = ({children}) => {
                     </Grid>
                   </Link>
                 </div>
-
               </Grid>
-
             </div>
           </Grid>
         </Hidden>
@@ -68,8 +66,7 @@ const Layout = ({children}) => {
               <img height='20em' src='https://res.cloudinary.com/hilnmyskv/image/upload/q_auto/v1594300044/Algolia_com_Website_assets/images/shared/algolia_logo/search-by-algolia-light-background.svg'></img>
             </a>
           </Grid>
-
-        </Toolbar> 
+        </Toolbar>
       </AppBar>
     </>
   )
