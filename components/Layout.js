@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Link from 'next/link'
 
 import {
@@ -8,6 +7,7 @@ import {
   Typography,
   AppBar,
   Toolbar,
+  IconButton,
   Hidden,
   List,
   Button
@@ -18,6 +18,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search';
 import GetAppIcon from '@material-ui/icons/GetApp';
+
+
 
 const Layout = ({children}) => {
   return (
@@ -46,11 +48,9 @@ const Layout = ({children}) => {
                     </Grid>
                   </Link>
                   <hr/>
-                  <a href='https://storage.googleapis.com/buildings-api/LOTB%20-IWWH-Buildings.csv' style={{textDecoration: 'none', color: 'inherit'}}>
-                    <Grid container direction='row'>
-                      <GetAppIcon color='inherit' />
-                    </Grid>
-                  </a>
+                  <IconButton onClick={event =>  window.location.href='https://storage.googleapis.com/buildings-api/LOTB%20-IWWH-Buildings.csv'} size='small' style={{textDecoration: 'none', color: 'inherit'}}>
+                    <GetAppIcon/>
+                    </IconButton>
                 </div>
               </Grid>
             </div>
