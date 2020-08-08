@@ -1,16 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-  
-import nextConnect from 'next-connect';
-import middleware from '../../middleware/middleware';
-import { getBuilding } from '../../lib/db';
 
-const handler = nextConnect();
+import {getBuildingByBBL} from '../../lib/api'
 
-handler.use(middleware);
+const Building = async(req, res) => {
+  const data = await getBuildingByBBL(req.params.id)
+  res.send(data[0])
+}
 
-handler.get(async (req, res) => {
-  const data = await getBuilding(req, req.query.id);
-  res.send({ data });
-});
-
-export default handler;
+export default Building

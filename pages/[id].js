@@ -1,11 +1,4 @@
-
-import { useRouter } from 'next/router'
-import Error from 'next/error'
-
 import Link from 'next/link'
-
-import middleware from '../middleware/middleware'
-import { getBuilding } from '../lib/db'
 
 import {
   Grid, 
@@ -23,8 +16,6 @@ import {
 } from '@material-ui/core'
 import {Alert, AlertTitle} from '@material-ui/lab'
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import SearchIcon from '@material-ui/icons/Search';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PeopleIcon from '@material-ui/icons/People';
 import HomeIcon from '@material-ui/icons/Home';
 import LocationCityIcon from '@material-ui/icons/LocationCity'
@@ -32,6 +23,10 @@ import LocationCityIcon from '@material-ui/icons/LocationCity'
 import QRCode from 'qrcode'
 
 import { useEffect, useState } from 'react'
+
+import {getAllBuildings, getBuildingByBBL} from '../lib/api'
+
+import Custom404 from './404'
 import { Layout, Community, Housing, City} from '../components'
 
 
@@ -64,10 +59,10 @@ function a11yProps(index) {
 
 
 const Building = ({data}) => {
-  if (!data) return <Error statusCode={404} />;
+  if (!data) return <Custom404 />;
 
   const {
-    _id, STREET_ADDRESS, BBL, ZIP, INC_2019, INC_2020, INCREASE,
+    STREET_ADDRESS, BBL, ZIP, INCREASE,
   } = data
 
   const [code , setCode] = useState()
@@ -85,7 +80,7 @@ const Building = ({data}) => {
 
   useEffect(() => {
     if (data) {
-      generateQR(`http://localhost:3000/${_id}}`)
+      generateQR(`http://localhost:3000/${BBL}}`)
     }
   }, [])
 
@@ -115,8 +110,7 @@ const Building = ({data}) => {
               <Typography variant='h5' color='textPrimary'>{ZIP}, NY</Typography>
               <br/>
               <Typography variant='body1' color='textPrimary'>BBL {BBL}</Typography>
-              <Chip label={`${INC_2020} HPD Violations in 2020`} color='secondary' style={{marginRight: '1em', marginTop: '1em'}}/>
-              <Chip label={`${INCREASE} YTD`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
+                <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
             </div>
           </Grid>
           <Hidden mdDown>
@@ -156,32 +150,29 @@ const Building = ({data}) => {
             <br/>
             <br/>
             <br/>
-
           </Grid>
-          {/*
-                      <Grid item xs={12} container direction='row'>
-            <Typography variant='body1' style={{marginRight: '1em', marginTop: '.5em'}}>Live Here? Register your rent-controlled lease on </Typography>
-            <Button href='https://leaseontheblock.care' color='secondary' variant='contained'>
-              <img width='110em' src='https://storage.googleapis.com/leaseotb-images/aqualogo2x.png'/>
-            </Button>
-          </Grid>
-          */}
       </Grid>
     </Layout>
   )
 } 
 
-export async function getServerSideProps(context) {
-  await middleware.apply(context.req, context.res)
-  console.log(context.params.id)
-  const d = await getBuilding(context.req, context.params.id)
-  if (!d) context.res.statusCode = 404
-  const data = JSON.parse(JSON.stringify(d))
+export async function getStaticProps({params}) {
+  const data = await getBuildingByBBL(params.id)
+  if (!data) return {props: { data: null}}
+
   return {
     props: {
-      data
-    },
-  };
+      data: data
+    }
+  }
+}
+
+export async function getStaticPaths() {
+  const allBBLs = await getAllBuildings()
+  return {
+    paths: allBBLs?.map((BBL) => `/${BBL.BBL}`) || [],
+    fallback: true
+  }
 }
 
 export default Building
