@@ -1,43 +1,35 @@
-import PropTypes from 'prop-types'
-import { isEqual } from 'lodash'
-
-import { GetServerSideProps } from 'next'
-
-import { useState, useEffect } from 'react'
-
-import { withRouter } from 'next/router'
-
-import qs from 'qs'
-
-import algoliasearch from 'algoliasearch/lite'
-
-import { findResultsState } from 'react-instantsearch-dom/server'
-
-import Background from '../public/background.png'
-
-import {SearchApp, Layout} from '../components'
-
+import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
+import { GetServerSideProps } from 'next';
+import { useState, useEffect } from 'react';
+import { withRouter } from 'next/router';
+import qs from 'qs';
+import algoliasearch from 'algoliasearch/lite';
+import { findResultsState } from 'react-instantsearch-dom/server';
+import Background from '../public/background.png';
+import { SearchApp, Layout } from '../components';
 
 const searchClient = algoliasearch(
-   process.env.ALGOLIA_APP_ID,
+  process.env.ALGOLIA_APP_ID,
   process.env.ALGOLIA_ADMIN_KEY
-)
+);
 
-const updateAfter = 700
+const updateAfter = 700;
 
-const createURL = state => `?${qs.stringify(state)}`
+const createURL = (state) => `?${qs.stringify(state)}`;
 
-const pathToSearchState = path =>
-  path.includes('?') ? qs.parse(path.substring(path.indexOf('?') + 1)) : {}
+const pathToSearchState = (path) =>
+  path.includes('?')
+    ? qs.parse(path.substring(path.indexOf('?') + 1))
+    : { query: '' };
 
-const searchStateToURL = searchState =>
-  searchState ? `${window.location.pathname}?${qs.stringify(searchState)}` : {}
+const searchStateToURL = (searchState) =>
+  searchState ? `${window.location.pathname}?${qs.stringify(searchState)}` : {};
 
 const DEFAULT_PROPS = {
   searchClient,
   indexName: 'buildings',
-}
-
+};
 
 class Index extends React.Component {
   static propTypes = {
@@ -75,7 +67,7 @@ class Index extends React.Component {
     return null;
   }
 
-  onSearchStateChange = searchState => {
+  onSearchStateChange = (searchState) => {
     clearTimeout(this.debouncedSetState);
 
     this.debouncedSetState = setTimeout(() => {
@@ -98,10 +90,10 @@ class Index extends React.Component {
           resultsState={this.props.resultsState}
           onSearchStateChange={this.onSearchStateChange}
           createURL={createURL}
-          />
+        />
       </Layout>
-    )
+    );
   }
 }
 
-export default withRouter(Index)
+export default withRouter(Index);

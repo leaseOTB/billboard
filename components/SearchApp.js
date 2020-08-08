@@ -1,105 +1,54 @@
-import React from 'react'
-
-import Link from 'next/link'
-import PropTypes from 'prop-types'
-
+import React from 'react';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
+import SearchCard from './SearchCard';
+import SearchList from './SearchList';
+import { InstantSearch } from 'react-instantsearch-dom';
 import {
-  RefinementList,
-  connectSearchBox,
-  Configure,
-  connectHits,
-  connectInfiniteHits,
-  connectPagination,
-  Highlight,
-  InstantSearch,
-} from 'react-instantsearch-dom'
-
-import {
-  Grid, 
-  Card, 
-  Typography, 
-  CardContent, 
-  CardActionArea, 
-  CircularProgress, 
+  Grid,
+  Card,
+  Typography,
+  CardContent,
+  CardActionArea,
+  CircularProgress,
   CardMedia,
   Button,
-  AppBar, 
+  AppBar,
   Toolbar,
   IconButton,
   TextField,
   Paper,
   Chip,
-} from '@material-ui/core'
+  Switch,
+  FormGroup,
+} from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import ClearIcon from '@material-ui/icons/Clear';
+import SearchIcon from '@material-ui/icons/Search';
+import CustomSearchBox from './SearchBar';
+import CustomCardHits from './CardHits';
+import CustomListHits from './ListHits';
 
-import {Alert, AlertTitle} from '@material-ui/lab'
-import ClearIcon from '@material-ui/icons/Clear'
-import SearchIcon from '@material-ui/icons/Search'
+// let searching = false;
 
-let searching = false
+const SearchApp = ({
+  searchState,
+  resultsState,
+  onSearchStateChange,
+  createURL,
+  indexName,
+  searchClient,
+}) => {
+  const [state, setState] = React.useState({
+    checked: false,
+  });
 
-const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
-  if (currentRefinement !== null) {searching = true}
-  if (currentRefinement == '') {searching = false}
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+  console.log(searchState);
   return (
-    <Grid container direction='row'>
-      <form noValidate action="" role='search' style={{width: '70%', marginTop: '2em',}}>
-        <TextField 
-          fullWidth
-          autoFocus
-          type='search'
-          size='medium'
-          placeholder={'Search by Address, ZIP Code, etc...'}
-          value={currentRefinement} 
-          onChange={event => refine(event.currentTarget.value)} />
-      </form>
-    </Grid>
-  )
-}
-
-const CustomSearchBox = connectSearchBox(SearchBox)
-
-const Hits = ({ hits }) => {
-
-  if (hits.length === 0 || !hits) return (
-    <Alert severity="error">
-      <AlertTitle>No results... Try something else!</AlertTitle>
-    </Alert>
-  )
-  return (
-    <Grid container direction='row' spacing={2}>
-      {hits.map(hit => (
-        <Grid item xs={12} md={4} key={hit.objectID}>
-          <Card style={{minHeight: '5em', backgroundColor: 'none'}}>
-            <CardActionArea href={`/${hit.BBL}`} style={{padding: '.5em'}}>
-              <Grid container direction='row'>
-                <Grid item xs={5}>
-                  <img style={{maxHeight: '7em', }} src={`https://maps.googleapis.com/maps/api/streetview?location=${hit.STREET_ADDRESS}&size=800x800&key=${process.env.GOOGLE_API}`} />
-                </Grid>
-                <Grid item xs={7}>
-                  <Typography variant='body1'>
-                  {hit.STREET_ADDRESS}
-                  </Typography>
-                  <Typography variant='caption'>
-                  {hit.ZIP}
-                  </Typography>
-                  <br/>
-                  <br/>
-                </Grid>
-              </Grid>
-            </CardActionArea>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-  )
-}
-
-const CustomHits = connectInfiniteHits(Hits)
-
-
-const SearchApp = ({searchState, resultsState, onSearchStateChange, createURL, indexName, searchClient }) => {
-  return (
-    <div style={{minHeight: '90vh'}}>
+    <div style={{ minHeight: '90vh' }}>
       <InstantSearch
         searchClient={searchClient}
         resultsState={resultsState}
@@ -107,30 +56,76 @@ const SearchApp = ({searchState, resultsState, onSearchStateChange, createURL, i
         searchState={searchState}
         createURL={createURL}
         indexName={indexName}
-        > 
-          <br/>
-          <Typography variant='h4' color='textPrimary'>Affordable Housing Community Billboard</Typography>
-          <CustomSearchBox />
-          <br/>
-            {!searching ? <>
-              <br/>
-              <Alert severity="info">
-                <AlertTitle>Start Typing to Find Your Building!</AlertTitle>
-              </Alert>
-              <br/>
+      >
+        <br />
+        <Typography variant='h4' color='textPrimary'>
+          Affordable Housing Community Billboard
+        </Typography>
+        <CustomSearchBox />
 
-              <CustomHits />
-
-            </> : <>
-          
-            <CustomHits />
-
-            <br/>
-            </>}
+        {searchState !== null && searchState.query.length < 1 ? (
+          <>
+            <br />
+            <Alert severity='info'>
+              <AlertTitle>Start Typing to Find Your Building!</AlertTitle>
+            </Alert>
+            <br />
+            <FormGroup>
+              <Typography component='div'>
+                <Grid
+                  component='label'
+                  container
+                  alignItems='center'
+                  spacing={1}
+                >
+                  <Grid item>Card</Grid>
+                  <Grid item>
+                    <Switch
+                      checked={state.checked}
+                      onChange={handleChange}
+                      name='checked'
+                      color='primary'
+                    />
+                  </Grid>
+                  <Grid item>List</Grid>
+                </Grid>
+              </Typography>
+            </FormGroup>
+            <br />
+            {!state.checked ? <CustomCardHits /> : <CustomListHits />}
+          </>
+        ) : (
+          <>
+            <FormGroup>
+              <Typography component='div'>
+                <Grid
+                  component='label'
+                  container
+                  alignItems='center'
+                  spacing={1}
+                >
+                  <Grid item>Card</Grid>
+                  <Grid item>
+                    <Switch
+                      checked={state.checked}
+                      onChange={handleChange}
+                      name='checked'
+                      color='primary'
+                    />
+                  </Grid>
+                  <Grid item>List</Grid>
+                </Grid>
+              </Typography>
+            </FormGroup>
+            <br />
+            {!state.checked ? <CustomCardHits /> : <CustomListHits />}
+            <br />
+          </>
+        )}
       </InstantSearch>
     </div>
-  )
-}
+  );
+};
 
 SearchApp.propTypes = {
   seachState: PropTypes.object,
@@ -138,7 +133,7 @@ SearchApp.propTypes = {
   onSearchStateChange: PropTypes.func,
   createURL: PropTypes.func,
   indexName: PropTypes.string,
-  searchClient: PropTypes.object
-}
+  searchClient: PropTypes.object,
+};
 
-export default SearchApp
+export default SearchApp;
