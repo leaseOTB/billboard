@@ -17,8 +17,6 @@ import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search';
-import GithubIcon from '@material-ui/icons/Github'
-import TwitterIcon from '@material-ui/icons/Twitter'
 
 const Layout = ({ children }) => {
   return (
