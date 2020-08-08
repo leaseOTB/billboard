@@ -66,31 +66,31 @@ const Hits = ({ hits }) => {
     </Alert>
   )
   return (
-      <Grid container direction='row' spacing={2}>
-        {hits.map(hit => (
-          <Grid item xs={12} md={4} key={hit.objectID}>
-            <Card style={{minHeight: '5em', backgroundColor: 'none'}}>
-              <CardActionArea href={`/${hit._id}`} style={{padding: '.5em'}}>
-                <Grid container direction='row'>
-                  <Grid item xs={5}>
-                    <img style={{maxHeight: '7em', }} src={`https://maps.googleapis.com/maps/api/streetview?location=${hit.STREET_ADDRESS}&size=800x800&key=${process.env.GOOGLE_API}`} />
-                  </Grid>
-                  <Grid item xs={7}>
-                    <Typography variant='body1'>
-                    {hit.STREET_ADDRESS}
-                    </Typography>
-                    <Typography variant='caption'>
-                    {hit.ZIP}
-                    </Typography>
-                    <br/>
-                    <br/>
-                  </Grid>
+    <Grid container direction='row' spacing={2}>
+      {hits.map(hit => (
+        <Grid item xs={12} md={4} key={hit.objectID}>
+          <Card style={{minHeight: '5em', backgroundColor: 'none'}}>
+            <CardActionArea href={`/${hit.BBL}`} style={{padding: '.5em'}}>
+              <Grid container direction='row'>
+                <Grid item xs={5}>
+                  <img style={{maxHeight: '7em', }} src={`https://maps.googleapis.com/maps/api/streetview?location=${hit.STREET_ADDRESS}&size=800x800&key=${process.env.GOOGLE_API}`} />
                 </Grid>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                <Grid item xs={7}>
+                  <Typography variant='body1'>
+                  {hit.STREET_ADDRESS}
+                  </Typography>
+                  <Typography variant='caption'>
+                  {hit.ZIP}
+                  </Typography>
+                  <br/>
+                  <br/>
+                </Grid>
+              </Grid>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
   )
 }
 
