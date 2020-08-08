@@ -43,39 +43,34 @@ const ListHits = ({ hits }) => {
         <AlertTitle>No results... Try something else!</AlertTitle>
       </Alert>
     );
-  const StyledTableCell = withStyles((theme) => ({
+  const StyledTableCell = withStyles(() => ({
     head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor: '#250A3C',
+      color: 'white',
     },
     body: {
       fontSize: 14,
     },
   }))(TableCell);
 
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
   const useStyles = makeStyles({
     table: {
-      minWidth: 700,
+      maxWidth: '80em',
     },
   });
   const classes = useStyles();
 
   return (
-    <Grid container direction='row' spacing={2}>
+    <Grid container direction='row'>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='customized table'>
           <TableHead>
             <TableRow>
-              <StyledTableCell>Picture</StyledTableCell>
-              <StyledTableCell align='right'>Address</StyledTableCell>
-              <StyledTableCell align='right'>Zip Code</StyledTableCell>
+              <StyledTableCell>Address</StyledTableCell>
+              <StyledTableCell>Zip Code</StyledTableCell>
+              <StyledTableCell>BBL</StyledTableCell>
+              <StyledTableCell>2020 Housing Violations</StyledTableCell>
+              <StyledTableCell>Housing Violations Increase</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -83,6 +78,9 @@ const ListHits = ({ hits }) => {
               <SearchList
                 address={hit.STREET_ADDRESS}
                 zipCode={hit.ZIP}
+                BBL={hit.BBL}
+                vi={hit.INC_2020}
+                inc={hit.INCREASE}
                 key={hit.objectID}
                 id={hit._id}
               />

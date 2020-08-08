@@ -20,18 +20,19 @@ import {
 
 export default function SearchCard(props) {
   return (
-    <Grid item xs={12} md={3}>
+    <Grid item xs={12} sm={6} md={6} lg={3}>
       <Card
         style={{
-          minHeight: '4em',
-          maxWidth: '30em',
+          minHeight: '7em',
+          maxHeight: '7em',
+          maxWidth: '20em',
           backgroundColor: 'none',
         }}
       >
         <CardActionArea
-          href={`/${props.id}`}
+          href={`/${props.BBL}`}
           style={{
-            padding: '.5em',
+            padding: '0em',
           }}
         >
           <Grid
@@ -46,7 +47,8 @@ export default function SearchCard(props) {
           >
             <Grid
               item
-              xs={5}
+              xs={12}
+              md={5}
               style={{
                 maxWidth: '7em',
                 display: 'flex',
@@ -57,8 +59,8 @@ export default function SearchCard(props) {
             >
               <img
                 style={{
-                  maxHeight: '7em',
-                  padding: '.2em',
+                  maxHeight: '8em',
+                  marginLeft: '-.4em',
                 }}
                 src={`https://maps.googleapis.com/maps/api/streetview?location=${props.address}&size=800x800&key=${process.env.GOOGLE_API}`}
               />
@@ -67,13 +69,10 @@ export default function SearchCard(props) {
               container
               direction='row'
               item
-              xs={7}
-              justify='center'
-              alignItems='center'
+              xs={12}
+              md={7}
             >
-              <Typography variant='body1'>{props.address}</Typography>
-              <br />
-              <br />
+              <Typography variant='body1' style={{padding: '1em'}}>{props.address}</Typography>
             </Grid>
           </Grid>
         </CardActionArea>

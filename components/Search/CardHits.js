@@ -36,11 +36,14 @@ const CardHits = ({ hits }) => {
       </Alert>
     );
   return (
-    <Grid container direction='row' spacing={2}>
+    <Grid container direction='row' spacing={2} justify='space-around'>
       {hits.map((hit) => (
         <SearchCard
           address={hit.STREET_ADDRESS}
           zipCode={hit.ZIP}
+          BBL={hit.BBL}
+          vi={hit.INC_2020}
+          inc={hit.INCREASE}
           key={hit.objectID}
           id={hit._id}
         />

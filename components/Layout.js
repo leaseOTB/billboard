@@ -17,6 +17,8 @@ import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search';
+import GithubIcon from '@material-ui/icons/Github'
+import TwitterIcon from '@material-ui/icons/Twitter'
 
 const Layout = ({ children }) => {
   return (
@@ -26,12 +28,13 @@ const Layout = ({ children }) => {
           <Grid item sm={2}>
             <div
               style={{
-                minHeight: '100vh',
+                minHeight: '45vh',
                 padding: '0em',
+                borderRadius: '0 0em 2em 0',
                 color: 'white',
                 position: 'fixed',
                 backgroundColor: '#250A3C',
-                overflow: 'visible',
+                overflow: 'hidden',
               }}
             >
               <Grid
@@ -42,7 +45,7 @@ const Layout = ({ children }) => {
               >
                 <div
                   style={{
-                    padding: '1em 2em',
+                    margin: '2em 0 4em 2.3em',
                     cursor: 'pointer',
                     textDecoration: 'none',
                   }}
@@ -52,6 +55,7 @@ const Layout = ({ children }) => {
                       <img
                         src='https://storage.googleapis.com/leaseotb-images/aquabox.png'
                         width='30em'
+                        aria-label='Lease on the Block'
                       />
                       <div style={{ minWidth: '0em' }} />
                       <Typography
@@ -67,7 +71,9 @@ const Layout = ({ children }) => {
                   style={{
                     color: 'black',
                     backgroundColor: 'white',
-                    padding: '1em 2.3em',
+                    padding: '1em 2em',
+                    marginLeft: '1em',
+                    borderRadius: '1em 0 0 1em',
                     cursor: 'pointer',
                     textDecoration: 'none',
                   }}
@@ -83,6 +89,7 @@ const Layout = ({ children }) => {
                     </Grid>
                   </Link>
                 </div>
+              
               </Grid>
             </div>
           </Grid>

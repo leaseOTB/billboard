@@ -107,7 +107,7 @@ const Building = ({data}) => {
               <br/>
               <Typography variant='h3' color='textPrimary'>{STREET_ADDRESS}</Typography>
               <hr/>
-              <Typography variant='h5' color='textPrimary'>{ZIP}, NY</Typography>
+              <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
               <br/>
               <Typography variant='body1' color='textPrimary'>BBL {BBL}</Typography>
                 <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>

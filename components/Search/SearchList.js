@@ -24,17 +24,18 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(() => ({
   root: {
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+      backgroundColor: '#e0e0e0',
     },
+    minWidth: '80em'
   },
 }))(TableRow);
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: '80em',
   },
 });
 export default function SearchList(props) {
@@ -100,20 +101,14 @@ export default function SearchList(props) {
     //     </CardActionArea>
     //   </Card>
     // </Grid>
-    <StyledTableRow key={props.id}>
-      <a href={`/${props.id}`}>
-        <StyledTableCell component='th' scope='row'>
-          <img
-            style={{
-              maxHeight: '7em',
-              padding: '.2em',
-            }}
-            src={`https://maps.googleapis.com/maps/api/streetview?location=${props.address}&size=800x800&key=${process.env.GOOGLE_API}`}
-          />
-        </StyledTableCell>
-        <StyledTableCell align='right'>{props.address}</StyledTableCell>
-        <StyledTableCell align='right'>{props.zipCode}</StyledTableCell>
-      </a>
+    <StyledTableRow key={props.id} className={classes.table}>
+      <a href={`/${props.BBL}`}>
+        <StyledTableCell>{props.address}</StyledTableCell>
+        </a>
+        <StyledTableCell>{props.zipCode}</StyledTableCell>
+        <StyledTableCell>{props.BBL}</StyledTableCell>
+        <StyledTableCell>{props.vi}</StyledTableCell>
+        <StyledTableCell>{props.inc}</StyledTableCell>
     </StyledTableRow>
   );
 }
