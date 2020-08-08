@@ -98,7 +98,7 @@ const Building = ({data}) => {
     setValue(newValue)
   }
 
-  const Images = () => <img style={{marginTop: '2em'}} src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x200&key=${process.env.GOOGLE_API}`}></img>
+  const Images = () => <img style={{marginTop: '2em', position: 'fixed'}} src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x200&key=${process.env.GOOGLE_API}`}></img>
   return (
     <Layout>
         <Grid item container direction='row' justify='space-between' spacing={4}>
@@ -113,13 +113,13 @@ const Building = ({data}) => {
                 <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
             </div>
           </Grid>
-          <Hidden mdDown>
-            <Grid item xs={5} >
+          <Hidden xlDown>
+            <Grid item >
               <Images/>
             </Grid>
           </Hidden>
-          <Grid item xs={11}>
-            <Paper elevation={10}>
+          <Grid item xs={12}>
+            <Paper elevation={10} style={{minWidth: '', maxWidth: '80em'}}>
               <Tabs
                 value={value}
                 onChange={handleChange} 
