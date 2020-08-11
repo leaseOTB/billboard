@@ -18,7 +18,7 @@
     "graphql-middleware": "^4.0.2",
     "graphql-tools": "^6.0.16",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "9.5.1",
+    "next": "9.5.2",
     "next-connect": "^0.8.1",
     "next-images": "^1.4.0",
     "qrcode": "^1.4.4",
