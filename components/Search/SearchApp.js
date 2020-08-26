@@ -26,6 +26,10 @@ import {
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
+
+import ImageIcon from '@material-ui/icons/Image'
+import ListAltIcon from '@material-ui/icons/ListAlt'
+
 import CustomSearchBox from './SearchBar';
 import CustomCardHits from './CardHits';
 import CustomListHits from './ListHits';
@@ -47,7 +51,6 @@ const SearchApp = ({
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
-  console.log(searchState);
   return (
     <div style={{ minHeight: '90vh' }}>
       <InstantSearch
@@ -75,8 +78,8 @@ const SearchApp = ({
                 spacing={0}
               > 
                 <Grid item>
-                  <div style={{padding: '1em'}}>
-                    Table View
+                  <div style={{padding: '.5em'}}>
+                    <ImageIcon/>
                   </div>
                 </Grid>
                 <Grid item>
@@ -86,6 +89,11 @@ const SearchApp = ({
                     name='checked'
                     color='secondary'
                   />
+                </Grid>
+                <Grid item>
+                  <div style={{padding: '.5em'}}>
+                    <ListAltIcon/>
+                  </div>
                 </Grid>
               </Grid>
             </Typography>

@@ -20,12 +20,12 @@ import {
 
 export default function SearchCard(props) {
   return (
-    <Grid item xs={12} sm={6} md={6} lg={3}>
+    <Grid item xs={12} sm={6} md={5} lg={4}>
       <Card
         style={{
           minHeight: '7em',
           maxHeight: '7em',
-          maxWidth: '20em',
+          maxWidth: '38em',
           backgroundColor: 'none',
         }}
       >
@@ -60,7 +60,7 @@ export default function SearchCard(props) {
               <img
                 style={{
                   maxHeight: '8em',
-                  marginLeft: '-.4em',
+                  marginLeft: '-3em',
                 }}
                 src={`https://maps.googleapis.com/maps/api/streetview?location=${props.address}&size=800x800&key=${process.env.GOOGLE_API}`}
               />
@@ -72,7 +72,7 @@ export default function SearchCard(props) {
               xs={12}
               md={7}
             >
-              <Typography variant='body1' style={{padding: '1em'}}>{props.address}</Typography>
+              <Typography variant='body1' style={{padding: '1em', marginBottom: '1em'}}>{props.address}</Typography>
             </Grid>
           </Grid>
         </CardActionArea>

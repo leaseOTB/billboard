@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 import {
   Grid,
@@ -19,6 +20,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search';
 
 const Layout = ({ children }) => {
+  
+  const [ route, setRoute ] = useState(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    setRoute(router.pathname)
+    console.log(route)
+  }, [route, setRoute])
+
   return (
     <>
       <Grid container direction='row' justify='space-between'>
@@ -65,36 +75,64 @@ const Layout = ({ children }) => {
                   </Link>
                 </div>
                 <br />
-                <div
-                  style={{
-                    color: 'black',
-                    backgroundColor: 'white',
-                    padding: '1em 1em',
-                    marginLeft: '2em',
-                    borderRadius: '1em 0 0 1em',
-                    cursor: 'pointer',
-                    textDecoration: 'none',
-                    boxShadow: '4'
-                  }}
-                >
-                  <Link href='/'>
-                    <Grid container direction='row'>
-                      <SearchIcon color='inherit' />
-                      <div style={{ minWidth: '0em' }} />
-                      <Typography
-                        variant='body1'
-                        color='textPrimary'
-                      ></Typography>
-                    </Grid>
-                  </Link>
-                </div>
-              
+                {(route === '/[id]') ? (
+                  <div
+                    style={{
+                      color: 'black',
+                      backgroundColor: 'white',
+                      padding: '1em 1em',
+                      marginLeft: '2em',
+                      borderRadius: '1em 0 0 1em',
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                      boxShadow: '4'
+                    }}
+                  >
+                    <Link href='/'>
+                      <Grid container direction='row'>
+                        <SearchIcon color='inherit' />
+                        <div style={{ minWidth: '0em' }} />
+                        <Typography
+                          variant='body1'
+                          color='textPrimary'
+                        ></Typography>
+                      </Grid>
+                    </Link>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      color: '#250A3C',
+                      backgroundColor: '#E86D48',
+                      padding: '1em 1em',
+                      marginLeft: '2em',
+                      borderRadius: '1em 0 0 1em',
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                      boxShadow: '4'
+                    }}
+                  >
+                    <Link href='/'>
+                      <Grid container direction='row'>
+                        <SearchIcon color='inherit' />
+                        <div style={{ minWidth: '0em' }} />
+                        <Typography
+                          variant='body1'
+                          color='textPrimary'
+                        ></Typography>
+                      </Grid>
+                    </Link>
+                  </div>
+                )}
+                
+                <br />
+                
               </Grid>
             </div>
           </Grid>
         </Hidden>
         <Grid item container xs={12} md={10}>
-          <div style={{ maxWidth: '70%', position: 'absolute', left: '13%' }}>
+          <div style={{ maxWidth: '70%', position: 'absolute', left: '13%', overflowX: 'hidden', overflowY: 'visible'}}>
             {children}
           </div>
         </Grid>

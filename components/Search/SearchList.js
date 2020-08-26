@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import {
   Grid,
@@ -29,7 +30,8 @@ const StyledTableRow = withStyles(() => ({
     '&:nth-of-type(odd)': {
       backgroundColor: '#e0e0e0',
     },
-    minWidth: '80em'
+    minWidth: '80em',
+    cursor: 'pointer'
   },
 }))(TableRow);
 
@@ -41,6 +43,10 @@ const useStyles = makeStyles({
 export default function SearchList(props) {
   const classes = useStyles();
 
+  const handleRoute = (e) => {
+    e.preventDefault()
+    Router.push(`/${props.BBL}`, undefined, {shallow: true})
+  }
   return (
     // <Grid item xs={12} md={3}>
     //   <Card
@@ -101,10 +107,8 @@ export default function SearchList(props) {
     //     </CardActionArea>
     //   </Card>
     // </Grid>
-    <StyledTableRow key={props.id} className={classes.table}>
-      <a href={`/${props.BBL}`}>
+    <StyledTableRow hover key={props.id} className={classes.table} onClick={handleRoute}>
         <StyledTableCell>{props.address}</StyledTableCell>
-        </a>
         <StyledTableCell>{props.zipCode}</StyledTableCell>
         <StyledTableCell>{props.BBL}</StyledTableCell>
         <StyledTableCell>{props.vi}</StyledTableCell>

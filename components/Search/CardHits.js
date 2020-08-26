@@ -36,7 +36,7 @@ const CardHits = ({ hits }) => {
       </Alert>
     );
   return (
-    <Grid container direction='row' spacing={2} justify='space-around'>
+    <Grid container direction='row' spacing={2} justify='flex-start'>
       {hits.map((hit) => (
         <SearchCard
           address={hit.STREET_ADDRESS}
