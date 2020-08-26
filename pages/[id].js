@@ -86,11 +86,9 @@ const Building = ({data}) => {
 
   if (!data) {
     return (
-      <Layout>
-        <div style={{ margin: '20em 10em'}}>
-          <CircularProgress />
-        </div>
-      </Layout>
+      <div style={{ margin: '20em 10em'}}>
+        <CircularProgress />
+      </div>
     )
   }
 
@@ -100,59 +98,57 @@ const Building = ({data}) => {
 
   const Images = () => <img style={{marginTop: '2em', position: 'fixed'}} src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x200&key=${process.env.GOOGLE_API}`}></img>
   return (
-    <Layout>
-        <Grid item container direction='row' justify='space-between' spacing={4}>
-          <Grid item>
-            <div style={{padding: '1em'}}>
-              <br/>
-              <Typography variant='h3' color='textPrimary'>{STREET_ADDRESS}</Typography>
-              <hr/>
-              <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
-              <br/>
-              <Typography variant='body1' color='textPrimary'>BBL {BBL}</Typography>
-                <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
-            </div>
+      <Grid item container direction='row' justify='space-between' spacing={4}>
+        <Grid item>
+          <div style={{padding: '1em'}}>
+            <br/>
+            <Typography variant='h3' color='textPrimary'>{STREET_ADDRESS}</Typography>
+            <hr/>
+            <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
+            <br/>
+            <Typography variant='body1' color='textPrimary'>BBL {BBL}</Typography>
+              <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
+          </div>
+        </Grid>
+        <Hidden xlDown>
+          <Grid item >
+            <Images/>
           </Grid>
-          <Hidden xlDown>
-            <Grid item >
-              <Images/>
-            </Grid>
-          </Hidden>
-          <Grid item xs={12}>
-            <Paper elevation={10} style={{minWidth: '', maxWidth: '80em'}}>
-              <Tabs
-                value={value}
-                onChange={handleChange} 
-                indicatorColor="secondary"
-                textColor="secondary"
-                variant="fullWidth"
-                >
-                  <Tab label="Community Advocates" icon={<PeopleIcon/>} {...a11yProps(0)} />
-                  <Tab label="Housing Agencies" icon={<HomeIcon />} {...a11yProps(1)} />
-                  <Tab label="City Services" icon={<LocationCityIcon/>} {...a11yProps(2)} />
-                </Tabs>
-              <TabPanel value={value} index={0}>
-                <Community/>
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <Housing/>
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <City/>
-              </TabPanel>
-              <a style={{textDecoration: 'none'}} href='https://hcr.ny.gov/RRP' target='__blank'>
-                <Alert severity="error">
-                    <AlertTitle>COVID-19 Alert</AlertTitle>
-                    Rent Relief is Available at this Address - <strong> Click to Apply</strong>
-                </Alert>
-              </a>
-            </Paper>
-            <br/>
-            <br/>
-            <br/>
-          </Grid>
-      </Grid>
-    </Layout>
+        </Hidden>
+        <Grid item xs={12}>
+          <Paper elevation={10} style={{ width: '80em', marginRight: '1em'}}>
+            <Tabs
+              value={value}
+              onChange={handleChange} 
+              indicatorColor="secondary"
+              textColor="secondary"
+              variant="fullWidth"
+              >
+                <Tab label="Community Advocates" icon={<PeopleIcon/>} {...a11yProps(0)} />
+                <Tab label="Housing Agencies" icon={<HomeIcon />} {...a11yProps(1)} />
+                <Tab label="City Services" icon={<LocationCityIcon/>} {...a11yProps(2)} />
+              </Tabs>
+            <TabPanel value={value} index={0}>
+              <Community/>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Housing/>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              <City/>
+            </TabPanel>
+            <a style={{textDecoration: 'none'}} href='https://hcr.ny.gov/RRP' target='__blank'>
+              <Alert severity="error">
+                  <AlertTitle>COVID-19 Alert</AlertTitle>
+                  Rent Relief is Available at this Address - <strong> Click to Apply</strong>
+              </Alert>
+            </a>
+          </Paper>
+          <br/>
+          <br/>
+          <br/>
+        </Grid>
+    </Grid>
   )
 } 
 

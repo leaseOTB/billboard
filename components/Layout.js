@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
           <Grid item sm={2}>
             <div
               style={{
-                minHeight: '45vh',
+                minHeight: '30vh',
                 padding: '0em',
                 borderRadius: '0 0em 2em 0',
                 color: 'white',
@@ -69,11 +69,12 @@ const Layout = ({ children }) => {
                   style={{
                     color: 'black',
                     backgroundColor: 'white',
-                    padding: '1em 2em',
-                    marginLeft: '1em',
+                    padding: '1em 1em',
+                    marginLeft: '2em',
                     borderRadius: '1em 0 0 1em',
                     cursor: 'pointer',
                     textDecoration: 'none',
+                    boxShadow: '4'
                   }}
                 >
                   <Link href='/'>
@@ -93,7 +94,7 @@ const Layout = ({ children }) => {
           </Grid>
         </Hidden>
         <Grid item container xs={12} md={10}>
-          <div style={{ maxWidth: '85%', position: 'absolute', left: '10%' }}>
+          <div style={{ maxWidth: '70%', position: 'absolute', left: '13%' }}>
             {children}
           </div>
         </Grid>

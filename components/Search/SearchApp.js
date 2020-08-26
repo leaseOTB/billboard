@@ -80,7 +80,7 @@ const SearchApp = ({
                   </div>
                 </Grid>
                 <Grid item>
-                  <input type='checkbox'
+                  <Switch
                     checked={state.checked}
                     onChange={handleChange}
                     name='checked'

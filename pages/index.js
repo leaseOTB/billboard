@@ -6,8 +6,7 @@ import { withRouter } from 'next/router';
 import qs from 'qs';
 import algoliasearch from 'algoliasearch/lite';
 import { findResultsState } from 'react-instantsearch-dom/server';
-import Background from '../public/background.png';
-import { SearchApp, Layout } from '../components';
+import { SearchApp } from '../components';
 
 const searchClient = algoliasearch(
   process.env.ALGOLIA_APP_ID,
@@ -83,15 +82,13 @@ class Index extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <SearchApp
-          {...DEFAULT_PROPS}
-          searchState={this.state.searchState}
-          resultsState={this.props.resultsState}
-          onSearchStateChange={this.onSearchStateChange}
-          createURL={createURL}
-        />
-      </Layout>
+      <SearchApp
+        {...DEFAULT_PROPS}
+        searchState={this.state.searchState}
+        resultsState={this.props.resultsState}
+        onSearchStateChange={this.onSearchStateChange}
+        createURL={createURL}
+      />
     );
   }
 }
