@@ -24,7 +24,9 @@
     "qrcode": "^1.4.4",
     "qs": "^6.9.4",
     "react": "16.13.1",
+    "react-autosuggest": "^10.0.2",
     "react-dom": "16.13.1",
-    "react-instantsearch-dom": "^6.6.0"
+    "react-instantsearch-dom": "^6.6.0",
+    "victory": "^35.0.9"
   }
 }

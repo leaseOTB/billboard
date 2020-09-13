@@ -33,16 +33,17 @@ import {
   makeStyles,
   TableCell,
 } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
-import SearchList from './SearchList';
+import { Alert, AlertTitle } from '@material-ui/lab'
+import SearchList from './SearchList'
 
-const ListHits = ({ hits }) => {
+export const FullPageHits = connectInfiniteHits(({ hits }) => {
+
   if (hits.length === 0 || !hits)
     return (
       <Alert severity='error'>
         <AlertTitle>No results... Try something else!</AlertTitle>
       </Alert>
-    );
+    )
   const StyledTableCell = withStyles(() => ({
     head: {
       backgroundColor: '#250A3C',
@@ -51,13 +52,13 @@ const ListHits = ({ hits }) => {
     body: {
       fontSize: 14,
     },
-  }))(TableCell);
+  }))(TableCell)
 
   const useStyles = makeStyles({
     table: {
       maxWidth: '80em',
     },
-  });
+  })
   const classes = useStyles();
 
   return (
@@ -89,8 +90,5 @@ const ListHits = ({ hits }) => {
         </Table>
       </TableContainer>
     </Grid>
-  );
-};
-
-const CustomListHits = connectInfiniteHits(ListHits);
-export default CustomListHits;
+  )
+})

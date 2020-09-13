@@ -1,11 +1,14 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useRef} from 'react'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Head from 'next/head';
 import Router from 'next/router'
 import { LinearProgress } from '@material-ui/core';
 
+
 import { Layout } from '../components'
+
+import '../lib/App.css'
 
 const theme = createMuiTheme({
   palette: {
@@ -24,10 +27,11 @@ const theme = createMuiTheme({
       default: 'white',
     },
   },
-});
+})
 
 function MyApp({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false)
+
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -56,7 +60,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <CssBaseline />
       <Layout>
-        {isLoading ? <LinearProgress color='error' style={{marginTop: '1em'}} /> : <Component {...pageProps} />}
+        <Component {...pageProps} />
       </Layout>
     </ThemeProvider>
   );

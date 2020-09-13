@@ -12,7 +12,8 @@ import {
   CircularProgress,
   Chip,
   Button,
-  Hidden
+  Hidden,
+  Badge
 } from '@material-ui/core'
 import {Alert, AlertTitle} from '@material-ui/lab'
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
@@ -27,12 +28,11 @@ import { useEffect, useState } from 'react'
 import {getAllBuildings, getBuildingByBBL} from '../lib/api'
 
 import Custom404 from './404'
-import { Layout, Community, Housing, City} from '../components'
+import { Layout, Community, Housing, City, ReportingList, ReportChart} from '../components'
 
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -47,19 +47,19 @@ function TabPanel(props) {
         </Grid>
       )}
     </div>
-  );
+  )
 }
 
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
     'aria-controls': `scrollable-force-tabpanel-${index}`,
-  };
+  }
 }
 
 
 const Building = ({data}) => {
-  if (!data) return <Custom404 />;
+  if (!data) return <Custom404 />
 
   const {
     STREET_ADDRESS, BBL, ZIP, INCREASE,
@@ -96,27 +96,30 @@ const Building = ({data}) => {
     setValue(newValue)
   }
 
-  const Images = () => <img style={{marginTop: '2em', position: 'fixed'}} src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x200&key=${process.env.GOOGLE_API}`}></img>
+  const Images = () => <img src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x300&key=${process.env.GOOGLE_API}`}></img>
   return (
-      <Grid item container direction='row' justify='space-between' spacing={4}>
-        <Grid item>
-          <div style={{padding: '1em'}}>
+    <Grid item container direction='row' justify='space-around'>
+      <Grid item container sm={12} md={7} direction='column'>
+        <Grid item container direction='row' justify='flex-start'>
+          <Grid item xs={3}>
             <br/>
-            <Typography variant='h3' color='textPrimary'>{STREET_ADDRESS}</Typography>
-            <hr/>
-            <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
             <br/>
-            <Typography variant='body1' color='textPrimary'>BBL {BBL}</Typography>
-              <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
-          </div>
-        </Grid>
-        <Hidden xlDown>
-          <Grid item >
-            <Images/>
+            <Images />
           </Grid>
-        </Hidden>
-        <Grid item xs={12}>
-          <Paper elevation={10} style={{ width: '80em', marginRight: '1em'}}>
+          <Grid item xs={8}>
+            <div style={{paddingTop: '1em', marginLeft: '10em'}}>
+              <br/>
+              <Typography variant='h3' color='textPrimary'>{STREET_ADDRESS}</Typography>
+              <hr/>
+              <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
+              <br/>
+              <Typography variant='body1' color='textPrimary'>BBL - {BBL}</Typography>
+              <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
+            </div>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Paper elevation={0} style={{ maxWidth: '55em', marginTop: '1em'}}>
             <Tabs
               value={value}
               onChange={handleChange} 
@@ -137,17 +140,23 @@ const Building = ({data}) => {
             <TabPanel value={value} index={2}>
               <City/>
             </TabPanel>
-            <a style={{textDecoration: 'none'}} href='https://hcr.ny.gov/RRP' target='__blank'>
-              <Alert severity="error">
-                  <AlertTitle>COVID-19 Alert</AlertTitle>
-                  Rent Relief is Available at this Address - <strong> Click to Apply</strong>
-              </Alert>
-            </a>
+            <Alert severity="info">
+              <AlertTitle>Check Your Lease for Violations!</AlertTitle>
+              Submit your lease today for confidential review
+            </Alert>
           </Paper>
-          <br/>
-          <br/>
-          <br/>
         </Grid>
+      </Grid>
+      <Grid item sm={12} md={5}>
+        <Paper elevation={5} style={{marginBottom: '-2em', marginTop: '2em'}}>
+          <Alert severity="error" style={{minWidth: '40%'}}>
+            <AlertTitle>Water Service Alert for <strong>{STREET_ADDRESS}</strong></AlertTitle>
+          </Alert>
+          <Typography variant='h5' style={{padding: '1em 1em 0em 1em', marginBottom: '-2em'}}>Reported Issues</Typography>
+          <ReportChart/>
+          <ReportingList/>
+        </Paper>
+      </Grid>
     </Grid>
   )
 } 

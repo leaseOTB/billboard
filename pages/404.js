@@ -2,10 +2,10 @@ import {
   Typography, LinearProgress, Button
 } from '@material-ui/core'
 import Link from 'next/link'
-import Layout from '../components/Layout'
+
 const Custom404 = () => {
   return (
-    <div style={{padding: '3em'}}>
+    <>
       <Typography variant='h1'>404!</Typography>
       <br/>
       <LinearProgress value={20} />
@@ -14,7 +14,7 @@ const Custom404 = () => {
         <Link href='/'>return to home</Link>
       </Button>
       <br/>
-    </div>
+    </>
   )
 }
 
