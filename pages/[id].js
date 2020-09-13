@@ -113,13 +113,20 @@ const Building = ({data}) => {
               <hr/>
               <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
               <br/>
-              <Typography variant='body1' color='textPrimary'>BBL - {BBL}</Typography>
-              <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginTop: '1em'}}/>
+              <Grid container alignItems='center' s>
+                <Typography variant='body1' color='textPrimary'>BBL - {BBL}</Typography>
+                <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginLeft: '1em'}}/>
+              </Grid>
+              <br/>
+              <Alert severity="info">
+                <AlertTitle>Check Your Lease for Violations!</AlertTitle>
+                Submit your lease today for confidential review
+              </Alert>
             </div>
           </Grid>
         </Grid>
         <Grid item>
-          <Paper elevation={0} style={{ maxWidth: '55em', marginTop: '1em'}}>
+          <Paper elevation={5} style={{ maxWidth: '55em', marginTop: '1em'}}>
             <Tabs
               value={value}
               onChange={handleChange} 
@@ -140,10 +147,6 @@ const Building = ({data}) => {
             <TabPanel value={value} index={2}>
               <City/>
             </TabPanel>
-            <Alert severity="info">
-              <AlertTitle>Check Your Lease for Violations!</AlertTitle>
-              Submit your lease today for confidential review
-            </Alert>
           </Paper>
         </Grid>
       </Grid>
