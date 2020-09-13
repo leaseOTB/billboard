@@ -20,15 +20,16 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import PeopleIcon from '@material-ui/icons/People';
 import HomeIcon from '@material-ui/icons/Home';
 import LocationCityIcon from '@material-ui/icons/LocationCity'
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 
 import QRCode from 'qrcode'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef} from 'react'
 
 import {getAllBuildings, getBuildingByBBL} from '../lib/api'
 
 import Custom404 from './404'
-import { Layout, Community, Housing, City, ReportingList, ReportChart} from '../components'
+import { Layout, Community, Housing, City, ReportingList, ReportChart, NewsFeed, Alerts} from '../components'
 
 
 function TabPanel(props) {
@@ -80,7 +81,7 @@ const Building = ({data}) => {
 
   useEffect(() => {
     if (data) {
-      generateQR(`http://localhost:3000/${BBL}}`)
+      generateQR(`http://billboard.leaseontheblock.care/${BBL}}`)
     }
   }, [])
 
@@ -101,32 +102,32 @@ const Building = ({data}) => {
     <Grid item container direction='row' justify='space-around'>
       <Grid item container sm={12} md={7} direction='column'>
         <Grid item container direction='row' justify='flex-start'>
-          <Grid item xs={3}>
-            <br/>
-            <br/>
-            <Images />
-          </Grid>
-          <Grid item xs={8}>
-            <div style={{paddingTop: '1em', marginLeft: '10em'}}>
+          <Hidden smDown>
+            <Grid item md={3}>
+              <br/>
+              <Images />
+            </Grid>
+          </Hidden>
+          <Grid item xs={12} md={8}>
+            <Paper elevation={5}  style={{padding: '1em', marginLeft: '0em'}}>
               <br/>
               <Typography variant='h3' color='textPrimary'>{STREET_ADDRESS}</Typography>
-              <hr/>
               <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
-              <br/>
-              <Grid container alignItems='center' s>
-                <Typography variant='body1' color='textPrimary'>BBL - {BBL}</Typography>
-                <Chip label={`${INCREASE} YTD in Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{marginLeft: '1em'}}/>
+              <Typography variant='body1' color='textPrimary'>BBL - {BBL}</Typography>
+              <hr/>
+
+              <Grid container alignItems='center'>
+              <Chip label={`Rent Regulated`} variant='default' color='primary' icon={<AttachMoneyIcon />} style={{margin: '1em 0 0em 1em'}}/>
+              <Chip label={`${INCREASE} YTD HPD Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{margin: '1em 0 0 1em'}}/>
+
               </Grid>
               <br/>
-              <Alert severity="info">
-                <AlertTitle>Check Your Lease for Violations!</AlertTitle>
-                Submit your lease today for confidential review
-              </Alert>
-            </div>
+              <ReportingList/>
+            </Paper>
           </Grid>
         </Grid>
-        <Grid item>
-          <Paper elevation={0} style={{ maxWidth: '55em', marginTop: '1em'}}>
+        <Grid item xs={12} md={11}>
+          <Paper elevation={10} style={{ maxWidth: '70em', marginTop: '1em'}}>
             <Tabs
               value={value}
               onChange={handleChange} 
@@ -147,18 +148,40 @@ const Building = ({data}) => {
             <TabPanel value={value} index={2}>
               <City/>
             </TabPanel>
+            <Alert severity="info">
+              <AlertTitle>Check Your Lease for Violations!</AlertTitle>
+              Submit your lease today for confidential review
+            </Alert>
           </Paper>
         </Grid>
       </Grid>
       <Grid item sm={12} md={5}>
-        <Paper elevation={5} style={{marginBottom: '-2em', margin: '2em'}}>
-          <Typography variant='h5' style={{padding: '1em 1em 0em 1em', marginBottom: '-2em'}}>Tenant Reported Issues</Typography>
-          <ReportChart/>
-          <Alert severity="error">
-                <AlertTitle>Water Service Alert</AlertTitle>
-              </Alert>
-          <ReportingList/>
+        <Paper elevation={5} style={{marginBottom: '-2em', margin: '0em'}}>
+          <Grid container alignItems='center'>
+          <Typography variant='h5' style={{padding: '1em 1em 0em 1em', marginBottom: '1em'}}>Recent Alerts</Typography>
+          <Alerts index={BBL}/>
+          </Grid>
+          <Alert severity='error'>
+            <AlertTitle>9/4/2020 @ 9:22AM - <strong>Rent Strike Reported</strong></AlertTitle>
+          </Alert>
+          <Alert severity='warning'>
+            <AlertTitle>9/1/2020 @ 7:00PM - <strong>NMIC Meeting</strong></AlertTitle>
+          </Alert>
+          <Alert severity='info'>
+            <AlertTitle>8/16/2020 @ 5:31PM - <strong>Electric Service Outage Reported</strong></AlertTitle>
+          </Alert>
+          <Alert severity='error'>
+            <AlertTitle>6/8/2020 @ 10:12AM - <strong>Tenant Harassment Reported</strong></AlertTitle>
+          </Alert>
         </Paper>
+          <br/>
+        <Paper elevation={5} style={{marginBottom: '-2em', margin: '0em', padding: '1em'}}>
+          <NewsFeed/>
+        </Paper>
+        
+      </Grid>
+      <Grid item container xs={12} justify='center'>
+        <Button variant='outlined'>Print this page</Button>
       </Grid>
     </Grid>
   )

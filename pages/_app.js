@@ -13,7 +13,7 @@ import '../lib/App.css'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#E86D48',
+      main: '#b71c1c',
       headerLink: 'black',
       headerLinkHover: '#E86D48',
     },

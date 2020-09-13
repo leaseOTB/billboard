@@ -57,6 +57,7 @@ class AutoComplete extends Component {
       placeholder: 'Search by Address, ZIP, BBL, etc...',
       onChange: this.onChange,
       value,
+      width: '20em'
     };
 
     return (

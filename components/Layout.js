@@ -16,7 +16,7 @@ import {
   IconButton
 } from '@material-ui/core'
 
-import {  } from '@material-ui/icons/Search'
+import { Footer } from './Footer'
 import Search from './Search'
 
 const Layout = ({ children }) => {
@@ -44,58 +44,36 @@ const Layout = ({ children }) => {
         <Toolbar style={{padding: '1em'}}>
           <Grid container direction='row' alignItems='center' justify='flex-start'>
             <Link href='/'>
-              {/**
-              <img
+             <>
+             <Hidden smDown>
+             <img
                 src='https://storage.googleapis.com/leaseotb-images/aquabox.png'
                 width='30em'
-                styyle={{marginLeft: '1em'}}
+                style={{marginLeft: '2em'}}
                 aria-label='Lease on the Block'
-              /> */}
+              />
+             </Hidden>
+
               <Typography
                 variant='h5'
                 color='inherit'
                 style={{ marginLeft: '1em' }}
-                >community billboard</Typography>
+                >Community Billboard</Typography>
+                </>
             </Link>
-            <Grid container direction='row' style={{marginLeft: '5em', zIndex: 5, maxWidth: '40em', height: '3em'}}>
+            <Grid container direction='row' style={{margin: '1em 0 1em 2em', zIndex: 5, maxWidth: '36em', height: '3em'}}>
               <Search />
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
-      <div style={{ maxWidth: '100%', position: 'absolute', jusitfy: 'center',  paddingTop: '4em', margin: '2em'}}>
+      <Hidden mdUp>
+        <div style={{minHeight: '3em'}}/>
+      </Hidden>
+      <div style={{ maxWidth: '100%', position: 'absolute', jusitfy: 'center',  paddingTop: '7em', margin: '2em'}}>
         {children}
       </div>
-        <Grid
-          container
-          direction='row'
-          justify='space-between'
-          alignItems='center'
-        >
-          <a
-            href='https://www.leaseontheblock.care'
-            target='__none'
-            style={{
-              textDecoration: 'none',
-              color: 'white',
-              marginTop: '.5em',
-            }}
-          >
-            <img
-              width='120em'
-              src='https://storage.googleapis.com/leaseotb-images/aqualogo2x.png'
-            ></img>
-          </a>
-          <Typography style={{ cursor: 'pointer' }} variant='body2'>
-            Esp&aacute;nol - <strong>English</strong>
-          </Typography>
-          <a href='https://www.algolia.com/' target='__none'>
-            <img
-              height='20em'
-              src='https://res.cloudinary.com/hilnmyskv/image/upload/q_auto/v1594300044/Algolia_com_Website_assets/images/shared/algolia_logo/search-by-algolia-light-background.svg'
-            ></img>
-          </a>
-        </Grid>
+      <Footer/>
     </>
   );
 };

@@ -12,7 +12,9 @@ import {
   connectHits
 } from 'react-instantsearch-dom'
 
-import { List, ListItem } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
+
+import { List, ListItem, Hidden } from '@material-ui/core'
 
 import AutoComplete from './Autocomplete'
 
@@ -39,6 +41,9 @@ export const SearchApp = () => {
 
   return (
     <>
+      <Hidden smDown>
+        <SearchIcon style={{marginTop: '.3em', marginRight: '.4em'}}/>
+      </Hidden>
       <InstantSearch
         searchClient={searchClient}
         indexName={'buildings'}
