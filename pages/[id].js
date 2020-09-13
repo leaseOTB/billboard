@@ -126,7 +126,7 @@ const Building = ({data}) => {
           </Grid>
         </Grid>
         <Grid item>
-          <Paper elevation={5} style={{ maxWidth: '55em', marginTop: '1em'}}>
+          <Paper elevation={0} style={{ maxWidth: '55em', marginTop: '1em'}}>
             <Tabs
               value={value}
               onChange={handleChange} 
@@ -151,12 +151,12 @@ const Building = ({data}) => {
         </Grid>
       </Grid>
       <Grid item sm={12} md={5}>
-        <Paper elevation={5} style={{marginBottom: '-2em', marginTop: '2em'}}>
-          <Alert severity="error" style={{minWidth: '40%'}}>
-            <AlertTitle>Water Service Alert for <strong>{STREET_ADDRESS}</strong></AlertTitle>
-          </Alert>
-          <Typography variant='h5' style={{padding: '1em 1em 0em 1em', marginBottom: '-2em'}}>Reported Issues</Typography>
+        <Paper elevation={5} style={{marginBottom: '-2em', margin: '2em'}}>
+          <Typography variant='h5' style={{padding: '1em 1em 0em 1em', marginBottom: '-2em'}}>Tenant Reported Issues</Typography>
           <ReportChart/>
+          <Alert severity="error">
+                <AlertTitle>Water Service Alert</AlertTitle>
+              </Alert>
           <ReportingList/>
         </Paper>
       </Grid>
