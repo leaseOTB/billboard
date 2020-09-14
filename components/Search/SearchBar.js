@@ -32,7 +32,7 @@ const CustomSearch = ({ currentRefinement, isSearchStalled, refine, onClick }) =
         noValidate
         action=''
         role='search'
-        style={{ width: '100%', marginTop: '1em', background: 'white', borderRadius: '.5em'}}
+        style={{ marginTop: '1em', background: 'white', borderRadius: '.5em'}}
       >
         <TextField
           fullWidth

@@ -46,8 +46,11 @@ class AutoComplete extends Component {
     )
   }
 
-  renderInput() {
-    return {}
+  onKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      this.props.onSuggestionCleared()
+      this.setState({value: ''})
+    }
   }
   render() {
     const { hits, onSuggestionSelected } = this.props;
@@ -57,7 +60,8 @@ class AutoComplete extends Component {
       placeholder: 'Search by Address, ZIP, BBL, etc...',
       onChange: this.onChange,
       value,
-      width: '20em'
+      width: '10em',
+      onKeyDown: this.onKeyDown
     };
 
     return (

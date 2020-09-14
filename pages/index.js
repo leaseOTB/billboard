@@ -15,21 +15,7 @@ const Title = () => {
   return (
     <>
       <img style={{borderRadius: '1em'}} width='100%' src='https://storage.googleapis.com/leaseotb-images/chinatown.jpg'/>
-      <Paper elevation={10} style={{marginTop: '-70%', width: '80%', marginLeft: '10%', padding: '2em'}}>
-        <Typography variant='h3'>NYC Affordable Housing Community Billboard</Typography>
-        <br/>
-        <Divider width='50%'/>
-      </Paper>
-      <br/>
-      <Paper elevation={10} style={{marginTop: '5%', width: '70%', marginLeft: '10%', padding: '2em'}}>
-        <Typography variant='h6' style={{padding: '.5em'}}>Search registered NYC affordable housing properties and view relevant tenant communities, report issues, and get alerts.</Typography>
-      </Paper>
-      <Paper elevation={0} style={{marginTop: '18%', width: '50%', marginLeft: '0%', padding: '1em'}}>
-        <Grid container direction='row' alignItems='center'>
-          <Typography variant='body1' style={{padding: '.5em'}}>
-            software by
-            
-          </Typography>
+      <Paper elevation={10} style={{marginTop: '-70%', width: '60%', marginLeft: '10%', padding: '2em'}}>
           <a
             href='https://www.leaseontheblock.care'
             target='__none'
@@ -37,15 +23,21 @@ const Title = () => {
               textDecoration: 'none',
               color: 'white',
               marginTop: '.4em',
+              marginLeft: '-1.6em'
             }}
           >
             <img
-              width='170em'
+              width='500em'
               src='https://storage.googleapis.com/leaseotb-images/purplelogo2x.png'
             ></img>
           </a>
-        </Grid>
-
+        <Typography variant='h3' color='secondary'>Community Billboard</Typography>
+        <br/>
+        <Divider width='50%'/>
+      </Paper>
+      <br/>
+      <Paper elevation={10} style={{marginTop: '5%', width: '70%', marginLeft: '10%', padding: '2em'}}>
+        <Typography variant='h6' style={{padding: '.5em'}}>Search registered NYC affordable housing properties.  View relevant tenant resources, report issues, and get alerts.</Typography>
       </Paper>
     </>
   )

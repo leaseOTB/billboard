@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
       <AppBar position='fixed' color='secondary' style={{zIndex: 1}}>
         <Toolbar style={{padding: '1em'}}>
           <Grid container direction='row' alignItems='center' justify='flex-start'>
-              <Hidden smDown>
+              <Hidden xsUp>
               <a href='https://leaseontheblock.care'>
                 <img
                     src='https://storage.googleapis.com/leaseotb-images/aquabox.png'
@@ -53,6 +53,7 @@ const Layout = ({ children }) => {
                   />
               </a>
               </Hidden>
+              <Hidden smDown>
               <Link href='/'>
                 <Typography
                   variant='h5'
@@ -60,7 +61,8 @@ const Layout = ({ children }) => {
                   style={{ marginLeft: '.5em', cursor: 'pointer'}}
                   >Community Billboard</Typography>
               </Link>
-            <Grid container direction='row' style={{margin: '0em 0 1em 2em', zIndex: 5, maxWidth: '36em', height: '2em'}}>
+              </Hidden>
+            <Grid container direction='row' style={{margin: '0em 0 1em 2em', zIndex: 5, maxWidth: '34em', height: '2em'}}>
               <Search />
             </Grid>
           </Grid>
