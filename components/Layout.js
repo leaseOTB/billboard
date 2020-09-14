@@ -57,18 +57,18 @@ const Layout = ({ children }) => {
               <Typography
                 variant='h5'
                 color='inherit'
-                style={{ marginLeft: '1em' }}
+                style={{ marginLeft: '.5em' }}
                 >Community Billboard</Typography>
                 </>
             </Link>
-            <Grid container direction='row' style={{margin: '1em 0 1em 2em', zIndex: 5, maxWidth: '36em', height: '3em'}}>
+            <Grid container direction='row' style={{margin: '0em 0 1em 2em', zIndex: 5, maxWidth: '36em', height: '2em'}}>
               <Search />
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
       <Hidden mdUp>
-        <div style={{minHeight: '3em'}}/>
+        <div style={{minHeight: '2em'}}/>
       </Hidden>
       <div style={{ maxWidth: '100%', position: 'absolute', jusitfy: 'center',  paddingTop: '7em', margin: '2em'}}>
         {children}

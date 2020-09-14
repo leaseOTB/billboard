@@ -7,6 +7,6 @@ export const NewsFeed = (address) => {
     <TwitterTimelineEmbed
       sourceType='profile'
       screenName='LeaseOTB'
-      options={{height: 400}}/>
+      options={{height: 500}}/>
   )
 }

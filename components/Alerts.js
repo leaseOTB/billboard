@@ -9,7 +9,7 @@ import EmailIcon from '@material-ui/icons/Email'
 export const Alerts = (index) => {
   return (
     <>
-      <div style={{padding: '2em 2em 2em 2em'}}>
+      <div style={{padding: '1em'}}>
         <Grid container spacing={5} alignItems="flex-end">
           <Grid item>
             <Button variant='outlined'>

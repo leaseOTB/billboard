@@ -21,6 +21,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import HomeIcon from '@material-ui/icons/Home';
 import LocationCityIcon from '@material-ui/icons/LocationCity'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
+import PrintIcon from '@material-ui/icons/Print'
 
 import QRCode from 'qrcode'
 
@@ -29,7 +30,9 @@ import { useEffect, useState, useRef} from 'react'
 import {getAllBuildings, getBuildingByBBL} from '../lib/api'
 
 import Custom404 from './404'
-import { Layout, Community, Housing, City, ReportingList, ReportChart, NewsFeed, Alerts} from '../components'
+import { Layout, Community, Housing, City, ReportingList, ReportChart, NewsFeed, Alerts, Printable} from '../components'
+
+// import PrintProvider, {Print, NoPrint} from 'react-easy-print'
 
 
 function TabPanel(props) {
@@ -99,7 +102,7 @@ const Building = ({data}) => {
 
   const Images = () => <img src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x300&key=${process.env.GOOGLE_API}`}></img>
   return (
-    <Grid item container direction='row' justify='space-around'>
+    <Grid item container direction='row' justify='space-evenly'>
       <Grid item container sm={12} md={7} direction='column'>
         <Grid item container direction='row' justify='flex-start'>
           <Hidden smDown>
@@ -109,11 +112,12 @@ const Building = ({data}) => {
             </Grid>
           </Hidden>
           <Grid item xs={12} md={8}>
-            <Paper elevation={5}  style={{padding: '1em', marginLeft: '0em'}}>
-              <br/>
-              <Typography variant='h3' color='textPrimary'>{STREET_ADDRESS}</Typography>
+            <Paper elevation={5}  style={{padding: '1.5em', marginLeft: '0em'}}>
+              <Typography variant='h3' color='textPrimary'>
+                {STREET_ADDRESS}               
+              </Typography>
               <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
-              <Typography variant='body1' color='textPrimary'>BBL - {BBL}</Typography>
+              <Typography variant='body1' color='textSecondary'>BBL - {BBL}</Typography>
               <hr/>
 
               <Grid container alignItems='center'>
@@ -123,6 +127,10 @@ const Building = ({data}) => {
               </Grid>
               <br/>
               <ReportingList/>
+              <div style={{marginBottom: '-2em'}}/>
+              <Link href={`/print/${BBL}`} >
+                <IconButton style={{marginLeft: '95%'}}  size='small'><PrintIcon/></IconButton>
+              </Link>
             </Paper>
           </Grid>
         </Grid>
@@ -148,29 +156,31 @@ const Building = ({data}) => {
             <TabPanel value={value} index={2}>
               <City/>
             </TabPanel>
-            <Alert severity="info">
-              <AlertTitle>Check Your Lease for Violations!</AlertTitle>
-              Submit your lease today for confidential review
-            </Alert>
+            <a href='https://forms.gle/vhNhAxDtcp6ckVtEA' target='__blank' style={{textDecoration: 'none'}}>
+              <Alert severity="info">
+                <AlertTitle>Check Your Lease for Violations!</AlertTitle>
+                Submit your lease today for confidential review
+              </Alert>
+            </a>
           </Paper>
         </Grid>
       </Grid>
       <Grid item sm={12} md={5}>
         <Paper elevation={5} style={{marginBottom: '-2em', margin: '0em'}}>
           <Grid container alignItems='center'>
-          <Typography variant='h5' style={{padding: '1em 1em 0em 1em', marginBottom: '1em'}}>Recent Alerts</Typography>
-          <Alerts index={BBL}/>
+            <Typography variant='h5' style={{padding: '1em', marginBottom: '0em'}}>Recent Alerts</Typography>
+            <Alerts index={BBL}/>
           </Grid>
           <Alert severity='error'>
             <AlertTitle>9/4/2020 @ 9:22AM - <strong>Rent Strike Reported</strong></AlertTitle>
           </Alert>
-          <Alert severity='warning'>
+          <Alert severity='info'>
             <AlertTitle>9/1/2020 @ 7:00PM - <strong>NMIC Meeting</strong></AlertTitle>
           </Alert>
-          <Alert severity='info'>
+          <Alert severity='warning'>
             <AlertTitle>8/16/2020 @ 5:31PM - <strong>Electric Service Outage Reported</strong></AlertTitle>
           </Alert>
-          <Alert severity='error'>
+          <Alert severity='warning'>
             <AlertTitle>6/8/2020 @ 10:12AM - <strong>Tenant Harassment Reported</strong></AlertTitle>
           </Alert>
         </Paper>
@@ -178,10 +188,6 @@ const Building = ({data}) => {
         <Paper elevation={5} style={{marginBottom: '-2em', margin: '0em', padding: '1em'}}>
           <NewsFeed/>
         </Paper>
-        
-      </Grid>
-      <Grid item container xs={12} justify='center'>
-        <Button variant='outlined'>Print this page</Button>
       </Grid>
     </Grid>
   )
