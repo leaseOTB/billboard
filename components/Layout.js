@@ -70,7 +70,7 @@ const Layout = ({ children }) => {
       <Hidden mdUp>
         <div style={{minHeight: '2em'}}/>
       </Hidden>
-      <div style={{ maxWidth: '100%', position: 'absolute', jusitfy: 'center',  paddingTop: '7em', margin: '2em'}}>
+      <div style={{ maxWidth: '100%', position: 'absolute', jusitfy: 'center',  paddingTop: '5em', paddingBottom: '3em', margin: '2em'}}>
         {children}
       </div>
       <Footer/>

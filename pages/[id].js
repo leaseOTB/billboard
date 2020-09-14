@@ -42,11 +42,10 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       {value === index && (
-        <Grid container style={{padding: '1em'}}>
+        <Grid container style={{padding: '0em'}}>
           {children}
         </Grid>
       )}
@@ -82,11 +81,6 @@ const Building = ({data}) => {
     }
   }
 
-  useEffect(() => {
-    if (data) {
-      generateQR(`http://billboard.leaseontheblock.care/${BBL}}`)
-    }
-  }, [])
 
   if (!data) {
     return (
@@ -103,7 +97,7 @@ const Building = ({data}) => {
   const Images = () => <img src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x300&key=${process.env.GOOGLE_API}`}></img>
   return (
     <Grid item container direction='row' justify='space-evenly'>
-      <Grid item container sm={12} md={7} direction='column'>
+      <Grid item container sm={12} md={6} direction='column'>
         <Grid item container direction='row' justify='flex-start'>
           <Hidden smDown>
             <Grid item md={3}>
@@ -111,34 +105,30 @@ const Building = ({data}) => {
               <Images />
             </Grid>
           </Hidden>
-          <Grid item xs={12} md={8}>
+          <Grid item sm={12} md={9}>
             <Paper elevation={5}  style={{padding: '1.5em', marginLeft: '0em'}}>
               <Typography variant='h3' color='textPrimary'>
                 {STREET_ADDRESS}               
               </Typography>
               <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
-              <Typography variant='body1' color='textSecondary'>BBL - {BBL}</Typography>
+              <Typography variant='body1' color='textSecondary'>BBL - {BBL}               
+                <Link href={`/print/${BBL}`} >
+                  <IconButton style={{marginLeft: '90%'}}  size='small'><PrintIcon/></IconButton>
+                </Link>
+              </Typography>
               <hr/>
-
               <Grid container alignItems='center'>
               <Chip label={`Rent Regulated`} variant='default' color='primary' icon={<AttachMoneyIcon />} style={{margin: '1em 0 0em 1em'}}/>
               <Chip label={`${INCREASE} YTD HPD Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{margin: '1em 0 0 1em'}}/>
-
               </Grid>
               <br/>
               <ReportingList/>
-              <div style={{marginBottom: '-2em'}}/>
-              <Link href={`/print/${BBL}`} >
-                <IconButton style={{marginLeft: '95%'}}  size='small'><PrintIcon/></IconButton>
-              </Link>
             </Paper>
           </Grid>
-        </Grid>
-        <Grid item xs={12} md={11}>
-          <Paper elevation={10} style={{ maxWidth: '70em', marginTop: '1em'}}>
+          <Paper elevation={10} style={{ marginTop: '1em', minWidth: '100%', maxWidth: '100%'}}>
             <Tabs
               value={value}
-              onChange={handleChange} 
+              onChange={handleChange}
               indicatorColor="secondary"
               textColor="secondary"
               variant="fullWidth"
@@ -147,13 +137,13 @@ const Building = ({data}) => {
                 <Tab label="Housing Agencies" icon={<HomeIcon />} {...a11yProps(1)} />
                 <Tab label="City Services" icon={<LocationCityIcon/>} {...a11yProps(2)} />
               </Tabs>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={value} index={0} >
               <Community/>
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value} index={1} >
               <Housing/>
             </TabPanel>
-            <TabPanel value={value} index={2}>
+            <TabPanel value={value} index={2} >
               <City/>
             </TabPanel>
             <a href='https://forms.gle/vhNhAxDtcp6ckVtEA' target='__blank' style={{textDecoration: 'none'}}>
@@ -163,9 +153,15 @@ const Building = ({data}) => {
               </Alert>
             </a>
           </Paper>
+          <br/>
+          <br/>
+          <br/>
         </Grid>
       </Grid>
       <Grid item sm={12} md={5}>
+        <Hidden mdUp>
+          <div style={{minHeight: '2em'}}/>
+        </Hidden>
         <Paper elevation={5} style={{marginBottom: '-2em', margin: '0em'}}>
           <Grid container alignItems='center'>
             <Typography variant='h5' style={{padding: '1em', marginBottom: '0em'}}>Recent Alerts</Typography>
@@ -188,6 +184,8 @@ const Building = ({data}) => {
         <Paper elevation={5} style={{marginBottom: '-2em', margin: '0em', padding: '1em'}}>
           <NewsFeed/>
         </Paper>
+        <br/>
+        <br/>
       </Grid>
     </Grid>
   )

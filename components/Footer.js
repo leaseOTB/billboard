@@ -15,7 +15,7 @@ export const Footer = () => {
           <Grid
             container
             direction='row'
-            justify='space-around'
+            justify='space-between'
             alignItems='center'
           >
             <a

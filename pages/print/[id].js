@@ -26,7 +26,7 @@ const Print = ({data}) => {
         </Link>
         <Button variant='contained' color='secondary' style={{margin: '2em'}} onClick={handlePrint}>Print out this billboard</Button>
       </Grid>
-      <Grid item xs={10} style={{minWidth: '100em', marginTop: '-10em'}}>
+      <Grid item xs={10} style={{minWidth: '100em', marginTop: '-15em'}}>
         <Printable ref={componentRef} data={data} />
       </Grid>
     </Grid>
