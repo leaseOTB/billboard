@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
       <AppBar position='fixed' color='secondary' style={{zIndex: 1}}>
         <Toolbar style={{padding: '1em'}}>
           <Grid container direction='row' alignItems='center' justify='flex-start'>
-            <Link href='/'>
+            <Link href='/' style={{pointer: 'cursor'}}>
              <>
              <Hidden smDown>
              <img
@@ -53,13 +53,12 @@ const Layout = ({ children }) => {
                 aria-label='Lease on the Block'
               />
              </Hidden>
-
-              <Typography
-                variant='h5'
-                color='inherit'
-                style={{ marginLeft: '.5em' }}
-                >Community Billboard</Typography>
-                </>
+            <Typography
+              variant='h5'
+              color='inherit'
+              style={{ marginLeft: '.5em' }}
+              >Community Billboard</Typography>
+              </>
             </Link>
             <Grid container direction='row' style={{margin: '0em 0 1em 2em', zIndex: 5, maxWidth: '36em', height: '2em'}}>
               <Search />

@@ -3,6 +3,11 @@ import {
   TextField,
   Grid,
   Modal,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Paper,
   Typography
 } from '@material-ui/core'
@@ -10,25 +15,11 @@ import { useState } from 'react'
 import PhoneIcon from '@material-ui/icons/Phone'
 import EmailIcon from '@material-ui/icons/Email'
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10
-}
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  }
-}
 
 export const Alerts = (index) => {
-  const [modalStyle] = useState(getModalStyle)
   const [open, setOpen] = useState(false)
 
-  const handleOpen = () => {
+  const handleClickOpen = () => {
     setOpen(true)
   };
 
@@ -36,39 +27,38 @@ export const Alerts = (index) => {
     setOpen(false)
   }
 
-  const body = (
-    <Paper style={modalStyle}>
-      <Typography>Sign up for text or email alerts for this address!</Typography>
-      <Grid container direction='row' alignItems='center'>
-        
-      </Grid>
-    </Paper>
-  )
   return (
     <>
       <div style={{padding: '1em'}}>
-        <Grid container spacing={5} alignItems="flex-end">
-          <Grid item>
-            <Button onClick={handleOpen} size='small' variant='outlined'>
-              <PhoneIcon style={{marginRight: '.3em'}}/>
-              Text Alerts
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button onClick={handleOpen} size='small' variant='outlined'>
-              <EmailIcon style={{marginRight: '.3em'}}/>
-              Email Alerts
-              </Button>
-          </Grid>
-        </Grid>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          >
-            {body}
-          </Modal>     
+      <Button variant="outlined" size='small' onClick={handleClickOpen}>
+        <EmailIcon style={{marginRight: '.4em'}}/>Subscribe to Email Alerts
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Subscribe to Email Alerts</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter your email address here. Lease on the Block will not share your email with third parties.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            color='secondary'
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="secondary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>   
       </div>
-      
     </>
   )
 }

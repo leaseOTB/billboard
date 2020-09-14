@@ -163,8 +163,8 @@ const Building = ({data}) => {
           <div style={{minHeight: '2em'}}/>
         </Hidden>
         <Paper elevation={5} style={{marginBottom: '-2em', margin: '0em'}}>
-          <Grid container alignItems='center'>
-            <Typography variant='h5' style={{padding: '1em', marginBottom: '0em'}}>Recent Alerts</Typography>
+          <Grid container alignItems='center' justify='space-between'>
+            <Typography variant='h5' style={{padding: '1em', marginBottom: '0em'}}>Property Alerts</Typography>
             <Alerts index={BBL}/>
           </Grid>
           <Alert severity='error'>
