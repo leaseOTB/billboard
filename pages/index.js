@@ -16,13 +16,37 @@ const Title = () => {
     <>
       <img style={{borderRadius: '1em'}} width='100%' src='https://storage.googleapis.com/leaseotb-images/chinatown.jpg'/>
       <Paper elevation={10} style={{marginTop: '-70%', width: '80%', marginLeft: '10%', padding: '2em'}}>
-        <Typography variant='h2'>NYC Affordable Housing Community Billboard</Typography>
+        <Typography variant='h3'>NYC Affordable Housing Community Billboard</Typography>
         <br/>
         <Divider width='50%'/>
       </Paper>
       <br/>
       <Paper elevation={10} style={{marginTop: '5%', width: '70%', marginLeft: '10%', padding: '2em'}}>
-        <Typography variant='h6' style={{padding: '.5em'}}>Search registered NYC affordable housing properties and view relevant tenant communities, report issues with the building or landlord, and get the latest news.</Typography>
+        <Typography variant='h6' style={{padding: '.5em'}}>Search registered NYC affordable housing properties and view relevant tenant communities, report issues, and get alerts.</Typography>
+      </Paper>
+      <Paper elevation={10} style={{marginTop: '5%', width: '50%', marginLeft: '10%', padding: '1em'}}>
+        <Grid container direction='row' alignItems='center'>
+          <Typography variant='body1' style={{padding: '.5em'}}>
+            software by
+            
+          </Typography>
+          <a
+            href='https://www.leaseontheblock.care'
+            target='__none'
+            style={{
+              textDecoration: 'none',
+              color: 'white',
+              marginTop: '.5em',
+            }}
+          >
+            <Typography></Typography>
+            <img
+              width='170em'
+              src='https://storage.googleapis.com/leaseotb-images/purplelogo2x.png'
+            ></img>
+          </a>
+        </Grid>
+
       </Paper>
     </>
   )
@@ -48,27 +72,27 @@ const TopBuildings = () => {
   ]
 
   return (
-    <Grid container>
-      <Typography variant='h3' style={{paddingLeft: '.3em', marginBottom: '1em'}}>Recently Active Properties</Typography>
+    <Grid container justify='center'>
+      <Typography variant='h3' style={{paddingLeft: '.3em', marginBottom: '.5em'}}>Recently Active Properties</Typography>
       {data.map(b => (
         <Grid item xs={6} md={12} xl={6}>
-        <Card style={{padding: '0em', margin: '1em', maxWidth: '500px', cursor: 'pointer'}}>
-          <CardActionArea href={`/${b.bbl}`}>
-            <CardMedia
-              component='img'
-              src={`https://maps.googleapis.com/maps/api/streetview?location=${b.add}&size=300x300&key=${process.env.GOOGLE_API}`}
-              height='140'
-              />
-            <CardContent>
-              <Typography gutterBottom variant='h5'>
-                {b.add}
-              </Typography>
-              <Typography gutterBottom variant='h6'>
-                New York City, NY {b.zip}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+          <Card style={{padding: '0em', margin: '1em', maxWidth: '400px', cursor: 'pointer'}}>
+            <CardActionArea href={`/${b.bbl}`}>
+              <CardMedia
+                component='img'
+                src={`https://maps.googleapis.com/maps/api/streetview?location=${b.add}&size=300x300&key=${process.env.GOOGLE_API}`}
+                height='140'
+                />
+              <CardContent>
+                <Typography gutterBottom variant='h5'>
+                  {b.add}
+                </Typography>
+                <Typography gutterBottom variant='h6'>
+                  New York City, NY {b.zip}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         </Grid>
       ))}
     </Grid>

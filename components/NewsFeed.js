@@ -6,7 +6,7 @@ export const NewsFeed = (address) => {
   return (
     <TwitterTimelineEmbed
       sourceType='profile'
-      screenName='LeaseOTB'
+      screenName='TenantsOrganiz1'
       options={{height: 500}}/>
   )
 }

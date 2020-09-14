@@ -50,7 +50,6 @@ export class Printable extends React.Component {
   const Images = () => <img src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x300&key=${process.env.GOOGLE_API}`}></img>
   return (
     <Grid item container direction='row' justify='space-around'>
-      <Grid item container sm={12} md={7} direction='column'>
         <Grid item container direction='row' justify='flex-start'>
           <Grid item xs={12} md={9}>
             <Paper elevation={5}  style={{padding: '1.5em', marginLeft: '0em'}}>
@@ -85,12 +84,11 @@ export class Printable extends React.Component {
               </Grid>
               <br/>
               <Alert severity="info">
-                <AlertTitle>Anonymously Report Issues & Check Your Lease for Violations!</AlertTitle>
+                <AlertTitle>Are you being overcharged?  Fill out our form to find out! </AlertTitle>
               </Alert>
             </Paper>
           </Grid>
         </Grid>
-      </Grid>
     </Grid>
   )
   }

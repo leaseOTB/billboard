@@ -16,17 +16,17 @@ const Print = ({data}) => {
   console.log(data.BBL)
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-  });
+  })
 
   return (
-    <Grid container direction='row' alignItems='center'>
-      <Grid item xs={2}>
+    <Grid container direction='row' justify='space-around' alignItems='flex-start'>
+      <Grid item xs={2} sm={2} container>
         <Link href={`/${data.BBL}`}>
           <Button variant='outlined' style={{margin: '2em'}} >Return to Building Page</Button>
         </Link>
         <Button variant='contained' color='secondary' style={{margin: '2em'}} onClick={handlePrint}>Print out this billboard</Button>
       </Grid>
-      <Grid item xs={10} style={{minWidth: '100em', marginTop: '-15em'}}>
+      <Grid item xs={8} sm={8} style={{minWidth: '70em'}} container>
         <Printable ref={componentRef} data={data} />
       </Grid>
     </Grid>
@@ -36,7 +36,6 @@ const Print = ({data}) => {
 export async function getStaticProps({params}) {
   const data = await getBuildingByBBL(params.id)
   if (!data) return {props: { data: null}}
-
   return {
     props: {
       data: data

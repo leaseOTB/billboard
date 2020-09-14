@@ -118,7 +118,7 @@ const Building = ({data}) => {
               </Typography>
               <hr/>
               <Grid container alignItems='center'>
-              <Chip label={`Rent Regulated`} variant='default' color='primary' icon={<AttachMoneyIcon />} style={{margin: '1em 0 0em 1em'}}/>
+              <Chip label={`Rent Regulated`} variant='outlined' color='primary' icon={<AttachMoneyIcon />} style={{margin: '1em 0 0em 1em'}}/>
               <Chip label={`${INCREASE} YTD HPD Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{margin: '1em 0 0 1em'}}/>
               </Grid>
               <br/>
@@ -146,10 +146,9 @@ const Building = ({data}) => {
             <TabPanel value={value} index={2} >
               <City/>
             </TabPanel>
-            <a href='https://forms.gle/vhNhAxDtcp6ckVtEA' target='__blank' style={{textDecoration: 'none'}}>
+            <a href='http://survey.leaseontheblock.care/' target='__blank' style={{textDecoration: 'none'}}>
               <Alert severity="info">
-                <AlertTitle>Check Your Lease for Violations!</AlertTitle>
-                Submit your lease today for confidential review
+                <AlertTitle>Are you being overcharged?  Fill out our form to find out! </AlertTitle>
               </Alert>
             </a>
           </Paper>
