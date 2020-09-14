@@ -27,7 +27,7 @@ const Title = () => {
             }}
           >
             <img
-              width='500em'
+              width='450em'
               src='https://storage.googleapis.com/leaseotb-images/purplelogo2x.png'
             ></img>
           </a>
