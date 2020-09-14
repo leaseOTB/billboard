@@ -12,13 +12,13 @@ export const Alerts = (index) => {
       <div style={{padding: '1em'}}>
         <Grid container spacing={5} alignItems="flex-end">
           <Grid item>
-            <Button variant='outlined'>
+            <Button size='small' variant='outlined'>
               <PhoneIcon style={{marginRight: '.3em'}}/>
               Text Alerts
             </Button>
           </Grid>
           <Grid item>
-            <Button variant='outlined'>
+            <Button size='small' variant='outlined'>
               <EmailIcon style={{marginRight: '.3em'}}/>
               Email Alerts
               </Button>

@@ -5,9 +5,12 @@ import {Button, Grid} from '@material-ui/core'
 import ReactToPrint, {useReactToPrint} from 'react-to-print'
 import { useEffect, useState, useRef} from 'react'
 import {getAllBuildings, getBuildingByBBL} from '../../lib/api'
+import Custom404 from './../404'
 
 const Print = ({data}) => {
-    
+
+  if (!data) return <Custom404 />
+
   const componentRef = useRef()
 
   const handlePrint = useReactToPrint({
@@ -24,7 +27,6 @@ const Print = ({data}) => {
       </Grid>
       <Grid item xs={10} style={{minWidth: '100em', marginTop: '-20em'}}>
         <Printable ref={componentRef} data={data} />
-
       </Grid>
     </Grid>
   )
