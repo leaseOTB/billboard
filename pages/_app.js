@@ -56,6 +56,12 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider theme={theme}>
       <Head>
         <title>Lease on the Block - Community Billboard</title>
+        <meta charset="UTF-8"/>
+        <meta name="og:title" content='Lease on the Block - Community Billboard'/>
+        <meta name="og:description" content="Search registered NYC affordable housing properties. View relevant tenant resources, report issues, and get alerts."/>
+        <meta name="keywords" content="Affordable Housing, Rent Regulation, Real Estate, Tenants" />
+        <meta name="author" content="Lease on the Block" />
+        <meta name="og:image" content="https://storage.googleapis.com/leaseotb-images/WhatsApp%20Image%202020-09-13%20at%2011.02.47%20PM.jpeg"/>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <CssBaseline />
