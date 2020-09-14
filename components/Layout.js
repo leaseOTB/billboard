@@ -58,11 +58,11 @@ const Layout = ({ children }) => {
                 <Typography
                   variant='h5'
                   color='inherit'
-                  style={{ marginLeft: '.5em', cursor: 'pointer'}}
+                  style={{ marginLeft: '.5em', marginRight: '2em',cursor: 'pointer'}}
                   >Community Billboard</Typography>
               </Link>
               </Hidden>
-            <Grid container direction='row' style={{margin: '0em 0 1em 2em', zIndex: 5, maxWidth: '34em', height: '2em'}}>
+            <Grid container direction='row' style={{margin: '0em 0 1em 1em', zIndex: 5, maxWidth: '34em', height: '2em'}}>
               <Search />
             </Grid>
           </Grid>
