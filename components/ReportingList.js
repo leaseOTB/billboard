@@ -69,7 +69,10 @@ export const ReportingList = () => {
         <DialogTitle id="form-dialog-title">Report an Issue</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please enter your email address and unit number. Lease on the Block will not share your personal data with third parties.
+            Please enter your email address and unit number. <strong>This report is purely for community documentation, and will not be shared with relevant legal entities.</strong>
+          </DialogContentText>
+          <DialogContentText>
+            To file a report with the city of New York, <a href='https://portal.311.nyc.gov/report-problems/' target='__blank' style={{textDecoration: 'none', color: 'black'}}>click here!</a>
           </DialogContentText>
           <Grid container spacing={4}>
             <Grid item xs={8}>
@@ -87,7 +90,6 @@ export const ReportingList = () => {
             <Grid item xs={4}>
               <TextField
                 required
-                autoFocus
                 color='secondary'
                 margin="dense"
                 id="name"
