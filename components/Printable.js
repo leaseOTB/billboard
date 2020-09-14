@@ -36,7 +36,7 @@ const QR = (props) => {
   const dataUrl = useQRCode(`http://billboard.leaseontheblock.care/${props.BBL}`)
 
   return ( 
-    <img src={dataUrl} style={{margin: '-1em 0 1em 1em'}}/>
+    <img src={dataUrl} style={{margin: '-1em 0 -1em 1em'}}/>
   )
 }
 export class Printable extends React.Component {
@@ -60,23 +60,25 @@ export class Printable extends React.Component {
                 <Typography variant='h5' color='textPrimary'>New York, NY {ZIP}</Typography>
                 <Typography variant='body1' color='textSecondary'>BBL - {BBL}</Typography>
                 <Grid container alignItems='center'>
-                  <Chip label={`Rent Regulated`} variant='default' color='primary' icon={<AttachMoneyIcon />} style={{margin: '1em 0 0em 0em'}}/>
+                  <Chip label={`Rent Regulated`} variant='outlined' color='primary' icon={<AttachMoneyIcon />} style={{margin: '1em 0 0em 0em'}}/>
                   <Chip label={`${INCREASE} YTD HPD Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{margin: '1em 0 0 1em'}}/>
                 </Grid>
                 </Grid>
                 <Grid item xs={4}>
                   <QR BBL={BBL}/>
+                  <Typography variant='caption1' style={{marginTop: '0em'}}>billboard.leaseontheblock.care</Typography>
+                  <div style={{minHeight: '.5em'}}/>
                   <a
                   href='https://www.leaseontheblock.care'
                   target='__none'
                   style={{
                     textDecoration: 'none',
                     color: 'white',
-                    marginLeft: '1.5em',
+                    marginLeft: '3em'
                   }}
                   >
                     <img
-                      width='150em'
+                      width='100em'
                       src='https://storage.googleapis.com/leaseotb-images/purplelogo2x.png'
                     ></img>
                   </a>
@@ -84,7 +86,8 @@ export class Printable extends React.Component {
               </Grid>
               <br/>
               <Alert severity="info">
-                <AlertTitle>Are you being overcharged?  Fill out our form to find out! </AlertTitle>
+                <AlertTitle style={{marginLeft: '4em'}}>Are you being overcharged?  Fill out our form to find out! </AlertTitle>
+                  <div style={{marginLeft: '10em'}}>https://survey.leaseontheblock.care/</div>
               </Alert>
             </Paper>
           </Grid>

@@ -24,7 +24,7 @@ const Title = () => {
       <Paper elevation={10} style={{marginTop: '5%', width: '70%', marginLeft: '10%', padding: '2em'}}>
         <Typography variant='h6' style={{padding: '.5em'}}>Search registered NYC affordable housing properties and view relevant tenant communities, report issues, and get alerts.</Typography>
       </Paper>
-      <Paper elevation={10} style={{marginTop: '5%', width: '50%', marginLeft: '10%', padding: '1em'}}>
+      <Paper elevation={0} style={{marginTop: '18%', width: '50%', marginLeft: '0%', padding: '1em'}}>
         <Grid container direction='row' alignItems='center'>
           <Typography variant='body1' style={{padding: '.5em'}}>
             software by
@@ -36,10 +36,9 @@ const Title = () => {
             style={{
               textDecoration: 'none',
               color: 'white',
-              marginTop: '.5em',
+              marginTop: '.4em',
             }}
           >
-            <Typography></Typography>
             <img
               width='170em'
               src='https://storage.googleapis.com/leaseotb-images/purplelogo2x.png'

@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <title>Affordable Housing Search</title>
+        <title>Lease on the Block - Community Billboard</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <CssBaseline />

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-
+import {useRouter} from 'next/router'
 import {
   Grid, 
   Card, 
@@ -22,6 +22,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import LocationCityIcon from '@material-ui/icons/LocationCity'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import PrintIcon from '@material-ui/icons/Print'
+import BuildIcon from '@material-ui/icons/Build';
 
 import QRCode from 'qrcode'
 
@@ -94,6 +95,7 @@ const Building = ({data}) => {
     setValue(newValue)
   }
 
+  const Router = useRouter()
   const Images = () => <img src={`https://maps.googleapis.com/maps/api/streetview?location=${STREET_ADDRESS}&size=300x300&key=${process.env.GOOGLE_API}`}></img>
   return (
     <Grid item container direction='row' justify='space-evenly'>
@@ -118,8 +120,10 @@ const Building = ({data}) => {
               </Typography>
               <hr/>
               <Grid container alignItems='center'>
-              <Chip label={`Rent Regulated`} variant='outlined' color='primary' icon={<AttachMoneyIcon />} style={{margin: '1em 0 0em 1em'}}/>
-              <Chip label={`${INCREASE} YTD HPD Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{margin: '1em 0 0 1em'}}/>
+                <a href='https://rentguidelinesboard.cityofnewyork.us/2020-21-apartment-loft-order-52/' target='__blank' style={{textDecoration: 'none', margin: '1em 0 0em 1em'}}>
+                  <Chip label={`Rent Regulated`} onClick={() => null} variant='outlined' color='primary' icon={<AttachMoneyIcon />} />
+                </a>
+                <Chip label={`${INCREASE} YTD HPD Violations`} variant='outlined' icon={<TrendingUpIcon />} style={{margin: '1em 0 0 1em'}}/>
               </Grid>
               <br/>
               <ReportingList/>
@@ -133,9 +137,9 @@ const Building = ({data}) => {
               textColor="secondary"
               variant="fullWidth"
               >
-                <Tab label="Community Advocates" icon={<PeopleIcon/>} {...a11yProps(0)} />
-                <Tab label="Housing Agencies" icon={<HomeIcon />} {...a11yProps(1)} />
-                <Tab label="City Services" icon={<LocationCityIcon/>} {...a11yProps(2)} />
+                <Tab label="Housing Resources" icon={<HomeIcon />} {...a11yProps(0)} />
+                <Tab label="Government Agencies" icon={<LocationCityIcon/>} {...a11yProps(1)} />
+                <Tab label="City Services" icon={<BuildIcon/>} {...a11yProps(2)} />
               </Tabs>
             <TabPanel value={value} index={0} >
               <Community/>
@@ -148,7 +152,7 @@ const Building = ({data}) => {
             </TabPanel>
             <a href='http://survey.leaseontheblock.care/' target='__blank' style={{textDecoration: 'none'}}>
               <Alert severity="info">
-                <AlertTitle>Are you being overcharged?  Fill out our form to find out! </AlertTitle>
+                <AlertTitle style={{marginLeft: '4em'}}>Are you being overcharged?  Click here to find out! </AlertTitle>
               </Alert>
             </a>
           </Paper>
