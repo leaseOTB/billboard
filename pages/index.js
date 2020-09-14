@@ -63,16 +63,11 @@ const TopBuildings = () => {
       zip: '10032',
       bbl: '1021280029'
     },
-    {
-      add: '625 WEST 156 STREET',
-      zip: '10032',
-      bbl: '1021340110'
-    }
   ]
 
   return (
     <Grid container justify='flex-start'>
-      <Typography variant='h3' style={{paddingLeft: '.3em', marginBottom: '.5em'}}>Recently Active Properties</Typography>
+      <Typography variant='h5' style={{paddingLeft: '.3em', marginBottom: '.5em'}}>Recently Active Properties</Typography>
       {data.map(b => (
         <Grid item xs={6} md={12} xl={6}>
           <Card style={{padding: '0em', margin: '1em', maxWidth: '400px', cursor: 'pointer'}}>
@@ -83,10 +78,10 @@ const TopBuildings = () => {
                 height='140'
                 />
               <CardContent>
-                <Typography gutterBottom variant='h5'>
+                <Typography gutterBottom variant='h6'>
                   {b.add}
                 </Typography>
-                <Typography gutterBottom variant='h6'>
+                <Typography gutterBottom variant='body1'>
                   New York City, NY {b.zip}
                 </Typography>
               </CardContent>
