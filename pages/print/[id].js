@@ -13,6 +13,7 @@ const Print = ({data}) => {
 
   const componentRef = useRef()
 
+  console.log(data.BBL)
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -25,7 +26,7 @@ const Print = ({data}) => {
         </Link>
         <Button variant='contained' color='secondary' style={{margin: '2em'}} onClick={handlePrint}>Print out this billboard</Button>
       </Grid>
-      <Grid item xs={10} style={{minWidth: '100em', marginTop: '-20em'}}>
+      <Grid item xs={10} style={{minWidth: '100em', marginTop: '-10em'}}>
         <Printable ref={componentRef} data={data} />
       </Grid>
     </Grid>

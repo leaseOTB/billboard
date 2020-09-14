@@ -32,8 +32,8 @@ import { Layout, Community, Housing, City, ReportingList, ReportChart, NewsFeed,
 
 // import PrintProvider, {Print, NoPrint} from 'react-easy-print'
 
-const QR = (BBL) => {
-  const dataUrl = useQRCode(`http://billboard.leaseontheblock.care/${BBL}`)
+const QR = (props) => {
+  const dataUrl = useQRCode(`http://billboard.leaseontheblock.care/${props.BBL}`)
 
   return ( 
     <img src={dataUrl} style={{margin: '-1em 0 1em 1em'}}/>
