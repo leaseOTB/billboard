@@ -72,7 +72,7 @@ const TopBuildings = () => {
   ]
 
   return (
-    <Grid container justify='center'>
+    <Grid container justify='flex-start'>
       <Typography variant='h3' style={{paddingLeft: '.3em', marginBottom: '.5em'}}>Recently Active Properties</Typography>
       {data.map(b => (
         <Grid item xs={6} md={12} xl={6}>
@@ -103,11 +103,11 @@ const TopBuildings = () => {
 const Index = () => {
   return (
     <Grid item container direction='row' justify='space-evenly'>
-      <Grid item container sm={12} md={6} direction='column'>
+      <Grid item container sm={12} md={7} direction='column'>
         <Title/>
         <br/>
       </Grid>
-      <Grid item container sm={12} md={5} direction='column'>
+      <Grid item container sm={12} md={3} direction='column'>
         <Grid item container direction='row' justify='flex-start'>
           <Paper elevation={7} style={{padding: '2em', width: '100%'}}>
             <TopBuildings/>
