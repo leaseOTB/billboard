@@ -59,9 +59,11 @@ const TopBuildings = () => {
 
   return (
     <Grid container justify='flex-start'>
-      <Typography variant='h5' style={{paddingLeft: '.3em', marginBottom: '.5em'}}>Recently Active Properties</Typography>
+      <Grid item xs={12}>
+        <Typography variant='h5' style={{paddingLeft: '.3em', marginBottom: '.5em'}}>Recently Active Properties</Typography>
+      </Grid>
       {data.map(b => (
-        <Grid item xs={6} md={12} xl={6}>
+        <Grid item xs={12} sm={6} md={12} xl={6}>
           <Card style={{padding: '0em', margin: '1em', maxWidth: '400px', cursor: 'pointer'}}>
             <CardActionArea href={`/${b.bbl}`}>
               <CardMedia
