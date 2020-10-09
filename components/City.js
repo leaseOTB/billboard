@@ -10,6 +10,11 @@ import {
   Paper,
   CircularProgress,
   Chip,
+  List,
+  ListItem,
+  ListItemText,
+  Avatar,
+  ListItemAvatar,
   Button
 } from '@material-ui/core'
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
@@ -17,42 +22,34 @@ import WhatshotIcon from '@material-ui/icons/Whatshot'
 
 const City = () => {
   return (
-    <Grid container spacing={4} style={{padding: '1em'}}>
-    <Grid item xs={6} container direction='row' spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant='h6' style={{marginLeft: '0em'}}>Emergency Services</Typography>
+    <Grid container style={{padding: '1em'}} alignItems='flex-start'>
+      <Grid item xs={6} container direction='row'>
+        <Typography variant='h6' style={{marginLeft: '1em', marginTop: '1em'}}>Emergency Services</Typography>
+          <List component='nav'>
+            <ListItem button component='a' href='https://www.facebook.com/inwoodfd/' target='__none'>
+              <ListItemAvatar><Avatar><WhatshotIcon/></Avatar></ListItemAvatar>
+              <ListItemText primary='Fire Department'></ListItemText>
+            </ListItem>
+            <ListItem button component='a' href='https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx/' target='__none'>
+              <ListItemAvatar><Avatar><LocalHospitalIcon/></Avatar></ListItemAvatar>
+              <ListItemText primary='Hospital'></ListItemText>
+            </ListItem>
+          </List>
       </Grid>
-      <Grid item xs={12}>
-        <Button variant='outlined' href='https://www.facebook.com/inwoodfd/' target='__none'>
-          <WhatshotIcon style={{fontSize: '3em', marginRight: '.5em'}} />
-          Fire Department
-        </Button>
-      </Grid>
-      <Grid item xs={12}>
-        <Button variant='outlined' href='https://data.cityofnewyork.us/Health/Hospitals/833h-xwsx/' target='__none'>
-          <LocalHospitalIcon style={{fontSize: '3em', marginRight: '.5em'}}  />
-          Hospital
-        </Button>
-      </Grid>
-    </Grid>
-    <Grid item xs={6} container direction='row' spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant='h6'>Social Services</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Button  variant='outlined' href='https://access.nyc.gov/' target='__none'>
-          <img width='50em' style={{marginRight: '1em'}} src='https://a069-access.nyc.gov/hrapartners/Images/accessnyc_lock.png' />
-          Access NYC
-        </Button>
-      </Grid>
-      <Grid item xs={12}>
-        <Button variant='outlined' href='https://access.nyc.gov/' target='__none'>
-          <img width='50em' style={{marginRight: '1em'}} src='https://a069-access.nyc.gov/accesshra/static/media/landingpage_HRAicon.1f96f614.png' />
-          Access HRA
-        </Button>
+      <Grid item xs={6} container direction='row'>
+      <Typography variant='h6' style={{marginLeft: '1em', marginTop: '1em'}}>Social Services</Typography>
+          <List component='nav'>
+            <ListItem button component='a' href='https://access.nyc.gov/' target='__none'>
+              <ListItemAvatar><Avatar src='https://a069-access.nyc.gov/hrapartners/Images/accessnyc_lock.png'/></ListItemAvatar>
+              <ListItemText primary='Access NYC'></ListItemText>
+            </ListItem>
+            <ListItem button component='a' href='https://a069-access.nyc.gov/accesshra/' target='__none'>
+              <ListItemAvatar><Avatar src='https://a069-access.nyc.gov/accesshra/static/media/landingpage_HRAicon.1f96f614.png'/></ListItemAvatar>
+              <ListItemText primary='Access HRA'></ListItemText>
+            </ListItem>
+          </List>
       </Grid>
     </Grid>
-  </Grid>
   )
 }
 

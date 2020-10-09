@@ -1,49 +1,38 @@
 import React from 'react';
-import Link from 'next/link';
-import PropTypes from 'prop-types';
+import { useRouter } from 'next/router'
 import {
   Grid,
-  Card,
-  Typography,
-  CardContent,
-  CardActionArea,
-  CircularProgress,
-  CardMedia,
-  Button,
-  AppBar,
-  Toolbar,
-  IconButton,
   TextField,
-  Paper,
-  Chip,
 } from '@material-ui/core';
 import {
-  RefinementList,
   connectSearchBox,
-  Configure,
-  connectHits,
-  connectInfiniteHits,
-  connectPagination,
-  Highlight,
-  InstantSearch,
 } from 'react-instantsearch-dom';
 
-let searching = false;
-const CustomSearchBox = connectSearchBox(SearchBox);
-function SearchBox({ currentRefinement, isSearchStalled, refine }) {
+
+import {SearchIcon} from '@material-ui/icons/Search'
+
+let searching;
+
+const CustomSearch = ({ currentRefinement, isSearchStalled, refine, onClick }) => {
   if (currentRefinement !== null) {
-    searching = true;
+    searching = true
   }
   if (currentRefinement == '') {
-    searching = false;
+    searching = false
   }
+
+  const router = useRouter()
+  const handleEnter = (currentRefinement) => {
+    router.push(`/search/${currentRefinement}`)
+  }
+
   return (
-    <Grid container direction='row'>
+    <Grid container direction='column' onClick={onClick}>
       <form
         noValidate
         action=''
         role='search'
-        style={{ width: '70%', marginTop: '2em' }}
+        style={{ marginTop: '1em', background: 'white', borderRadius: '.5em'}}
       >
         <TextField
           fullWidth
@@ -53,10 +42,11 @@ function SearchBox({ currentRefinement, isSearchStalled, refine }) {
           placeholder={'Search by Address, ZIP Code, etc...'}
           value={currentRefinement}
           onChange={(event) => refine(event.currentTarget.value)}
+          onSubmit={handleEnter}
         />
       </form>
     </Grid>
-  );
+  )
 }
 
-export default CustomSearchBox;
+export const SearchBar = connectSearchBox(CustomSearch)

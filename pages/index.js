@@ -1,96 +1,109 @@
-import PropTypes from 'prop-types';
-import { isEqual } from 'lodash';
-import { GetServerSideProps } from 'next';
-import { useState, useEffect } from 'react';
-import { withRouter } from 'next/router';
-import qs from 'qs';
-import algoliasearch from 'algoliasearch/lite';
-import { findResultsState } from 'react-instantsearch-dom/server';
-import { SearchApp } from '../components';
+import {
+  Typography,
+  Grid,
+  Paper,
+  Divider,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia
+} from '@material-ui/core'
 
-const searchClient = algoliasearch(
-  process.env.ALGOLIA_APP_ID,
-  process.env.ALGOLIA_ADMIN_KEY
-);
+import { NewsFeed } from '../components'
 
-const updateAfter = 700;
-
-const createURL = (state) => `?${qs.stringify(state)}`;
-
-const pathToSearchState = (path) =>
-  path.includes('?')
-    ? qs.parse(path.substring(path.indexOf('?') + 1))
-    : { query: '' };
-
-const searchStateToURL = (searchState) =>
-  searchState ? `${window.location.pathname}?${qs.stringify(searchState)}` : {};
-
-const DEFAULT_PROPS = {
-  searchClient,
-  indexName: 'buildings',
-};
-
-class Index extends React.Component {
-  static propTypes = {
-    router: PropTypes.object.isRequired,
-    resultsState: PropTypes.object,
-    searchState: PropTypes.object,
-  };
-
-  state = {
-    searchState: this.props.searchState,
-    lastRouter: this.props.router,
-  };
-
-  static async getInitialProps({ asPath }) {
-    const searchState = pathToSearchState(asPath);
-    const resultsState = await findResultsState(SearchApp, {
-      ...DEFAULT_PROPS,
-      searchState,
-    });
-
-    return {
-      resultsState,
-      searchState,
-    };
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (!isEqual(state.lastRouter, props.router)) {
-      return {
-        searchState: pathToSearchState(props.router.asPath),
-        lastRouter: props.router,
-      };
-    }
-
-    return null;
-  }
-
-  onSearchStateChange = (searchState) => {
-    clearTimeout(this.debouncedSetState);
-
-    this.debouncedSetState = setTimeout(() => {
-      const href = searchStateToURL(searchState);
-
-      this.props.router.push(href, href, {
-        shallow: true,
-      });
-    }, updateAfter);
-
-    this.setState({ searchState });
-  };
-
-  render() {
-    return (
-      <SearchApp
-        {...DEFAULT_PROPS}
-        searchState={this.state.searchState}
-        resultsState={this.props.resultsState}
-        onSearchStateChange={this.onSearchStateChange}
-        createURL={createURL}
-      />
-    );
-  }
+const Title = () => {
+  return (
+    <>
+      <img style={{borderRadius: '1em'}} width='100%' src='https://storage.googleapis.com/leaseotb-images/chinatown.jpg'/>
+      <Paper elevation={10} style={{marginTop: '-70%', width: '60%', marginLeft: '10%', padding: '2em'}}>
+          <a
+            href='https://www.leaseontheblock.care'
+            target='__none'
+            style={{
+              textDecoration: 'none',
+              color: 'white',
+              marginTop: '.4em',
+              marginLeft: '-1.6em'
+            }}
+          >
+            <img
+              width='450em'
+              src='https://storage.googleapis.com/leaseotb-images/purplelogo2x.png'
+            ></img>
+          </a>
+        <Typography variant='h3' color='secondary'>Community Billboard</Typography>
+        <br/>
+        <Divider width='50%'/>
+      </Paper>
+      <br/>
+      <Paper elevation={10} style={{marginTop: '5%', width: '70%', marginLeft: '10%', padding: '2em'}}>
+        <Typography variant='h6' style={{padding: '.5em'}}>Search registered NYC affordable housing properties.  View relevant tenant resources, report issues, and get alerts.</Typography>
+      </Paper>
+    </>
+  )
 }
 
-export default withRouter(Index);
+const TopBuildings = () => {
+  const data = [
+    {
+      add: '64 VERMILYEA AVENUE',
+      zip: '10034',
+      bbl: '1022340039'
+    },
+    {
+      add: '111 AUDUBON AVENUE',
+      zip: '10032',
+      bbl: '1021280029'
+    },
+  ]
+
+  return (
+    <Grid container justify='flex-start'>
+      <Grid item xs={12}>
+        <Typography variant='h5' style={{paddingLeft: '.3em', marginBottom: '.5em'}}>Recently Active Properties</Typography>
+      </Grid>
+      {data.map(b => (
+        <Grid item xs={12} sm={6} md={12} xl={6}>
+          <Card style={{padding: '0em', margin: '1em', maxWidth: '400px', cursor: 'pointer'}}>
+            <CardActionArea href={`/${b.bbl}`}>
+              <CardMedia
+                component='img'
+                src={`https://maps.googleapis.com/maps/api/streetview?location=${b.add}&size=300x300&key=${process.env.GOOGLE_API}`}
+                height='140'
+                />
+              <CardContent>
+                <Typography gutterBottom variant='h6'>
+                  {b.add}
+                </Typography>
+                <Typography gutterBottom variant='body1'>
+                  New York City, NY {b.zip}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
+  )
+}
+
+
+const Index = () => {
+  return (
+    <Grid item container direction='row' justify='space-evenly'>
+      <Grid item container sm={12} md={7} direction='column'>
+        <Title/>
+        <br/>
+      </Grid>
+      <Grid item container sm={12} md={3} direction='column'>
+        <Grid item container direction='row' justify='flex-start'>
+          <Paper elevation={7} style={{padding: '2em', width: '100%'}}>
+            <TopBuildings/>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Grid>
+  )
+}
+
+export default Index
